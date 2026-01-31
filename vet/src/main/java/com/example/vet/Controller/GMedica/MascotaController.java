@@ -2,7 +2,6 @@ package com.example.vet.Controller.GMedica;
 
 import com.example.vet.Model.GestionMedica.Mascota;
 import com.example.vet.Service.GMedica.MascotaService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +23,8 @@ public class MascotaController {
 
     @PostMapping
     public ResponseEntity<?> crear(@RequestBody Mascota mascota) {
-        // Esto imprimirá en la consola de IntelliJ/Eclipse si el cliente llegó o no
         System.out.println("DATOS RECIBIDOS: " + mascota.getNombre());
-        if(mascota.getCliente() != null) {
+        if (mascota.getCliente() != null) {
             System.out.println("ID DEL CLIENTE: " + mascota.getCliente().getId());
         } else {
             System.out.println("EL CLIENTE LLEGÓ NULO DESDE EL JSON");

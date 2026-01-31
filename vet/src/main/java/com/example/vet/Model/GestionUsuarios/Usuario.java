@@ -1,6 +1,5 @@
 package com.example.vet.Model.GestionUsuarios;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Set;
@@ -22,14 +21,10 @@ public class Usuario {
     private boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuarios_roles",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id")
-    )
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles;
 
-    //para saber si un usuario es un trabajador
+    // para saber si un usuario es un trabajador
     @OneToOne
     @JoinColumn(name = "trabajador_id")
     private Trabajador usuario;

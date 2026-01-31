@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @Data
 @Entity
@@ -18,13 +17,14 @@ public class Auditoria {
     private String tipoEvento;
     private String usuario;
 
-    @Column(name = "fecha_hora",updatable = false)
+    @Column(name = "fecha_hora", updatable = false)
     private LocalDateTime fechaHora;
 
     @PrePersist
-    protected void onCreate(){
+    protected void onCreate() {
         this.fechaHora = LocalDateTime.now();
     }
+
     private String descripcion;
 
     @Column(columnDefinition = "JSON")
