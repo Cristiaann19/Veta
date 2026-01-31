@@ -1,0 +1,60 @@
+<div id="section-vacunas" class="p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-gray-800">Catálogo de Vacunas</h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @for (v of vacunas; track v.id) {
+        <div
+            class="bg-white p-6 rounded-xl border border-gray-200 flex flex-col hover:shadow-lg transition-all relative group">
+            <button (click)="eliminar(v.id)"
+                class="absolute top-3 right-3 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
+
+            <div class="flex items-center gap-4 mb-4">
+                <div
+                    class="w-12 h-12 rounded-lg bg-cyan-100 text-cyan-600 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-2xl">vaccines</span>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 leading-tight">{{ v.nombre }}</h4>
+                    <p class="text-xs text-gray-500 uppercase tracking-wide">{{ v.fabricante }}</p>
+                </div>
+            </div>
+
+            <div class="space-y-2 mb-4 flex-grow">
+                <div class="flex justify-between text-sm border-b border-gray-50 pb-1">
+                    <span class="text-gray-500">Previene:</span>
+                    <span class="font-medium text-gray-700 text-right">{{ v.enfermedadAsociada }}</span>
+                </div>
+                <div class="flex justify-between text-sm border-b border-gray-50 pb-1">
+                    <span class="text-gray-500">Edad Rec:</span>
+                    <span class="font-medium text-gray-700">{{ v.edadRecomendada }} meses</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-500">Dosis:</span>
+                    <span class="px-2 py-0.5 bg-gray-100 rounded text-xs font-bold text-gray-600">
+                        {{ v.dosis }} dosis
+                    </span>
+                </div>
+            </div>
+
+            <button (click)="editar(v)"
+                class="w-full border border-gray-200 text-gray-600 hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200 py-2 rounded-lg transition-colors text-sm font-medium">
+                Editar Ficha
+            </button>
+        </div>
+        }
+
+        <div (click)="nuevaVacuna()"
+            class="bg-gray-50 p-6 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-center hover:border-cyan-500 hover:bg-cyan-50/30 transition-all cursor-pointer min-h-[200px] group">
+            <div
+                class="w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center mb-3 text-gray-400 group-hover:text-cyan-500">
+                <span class="material-symbols-outlined text-3xl">add</span>
+            </div>
+            <h3 class="font-bold text-gray-600">Registrar Vacuna</h3>
+            <p class="text-xs text-gray-400 mt-1">Añadir al inventario</p>
+        </div>
+    </div>
+</div>
