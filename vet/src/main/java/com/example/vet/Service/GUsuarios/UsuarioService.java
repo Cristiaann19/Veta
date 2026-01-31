@@ -3,7 +3,6 @@ package com.example.vet.Service.GUsuarios;
 import com.example.vet.Model.GestionUsuarios.Usuario;
 import com.example.vet.Repository.GUsuarios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
