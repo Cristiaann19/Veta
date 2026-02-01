@@ -1,13 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
+/* PrimeUI debe ir después de Tailwind para que sus capas coincidan */
+@import "tailwindcss-primeui";
 
-* {
-    font-family: Inter, system-ui, sans-serif;
+html,
+body {
+    margin: 0;
+    padding: 0;
 }
 
-.bg-primary {
-    background-color: #10b981 !important;
-    cursor: pointer;
+* {
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Cambia el color del número de página activa de PrimeNG */
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: #0a9164 !important;
+    color: white !important;
+    border-radius: 50%;
+}
+
+.p-paginator {
+    background: transparent !important;
+    border: none !important;
 }

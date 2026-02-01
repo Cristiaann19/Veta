@@ -11,15 +11,23 @@ public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
 
-    public List<Producto> listar() { return productoRepository.findAll(); }
+    public List<Producto> listar() {
+        return productoRepository.findAll();
+    }
 
-    public Producto guardar(Producto p) { return productoRepository.save(p); }
+    public Producto guardar(Producto p) {
+        return productoRepository.save(p);
+    }
 
     public void actualizarStock(Long id, Integer cantidad) {
         Producto p = productoRepository.findById(id).orElse(null);
-        if(p != null) {
+        if (p != null) {
             p.setStock(p.getStock() - cantidad);
             productoRepository.save(p);
         }
+    }
+
+    public void eliminar(Long id) {
+        productoRepository.deleteById(id);
     }
 }

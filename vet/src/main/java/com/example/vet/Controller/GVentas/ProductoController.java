@@ -29,4 +29,9 @@ public class ProductoController {
     public void actualizarStock(@PathVariable Long id, @RequestParam Integer cantidad) {
         productoService.actualizarStock(id, cantidad);
     }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id) {
+        productoService.eliminar(id);
+    }
 }

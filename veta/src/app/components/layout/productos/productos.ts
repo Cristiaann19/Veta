@@ -1,10 +1,107 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Producto } from '../../../models/producto';
+import { ProductoService } from '../../../services/productos';
+// PrimeNG
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
   selector: 'app-productos',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, FormsModule, DialogModule, ButtonModule, InputTextModule, PaginatorModule],
   templateUrl: './productos.html',
 })
-export class Productos {
+export class Productos implements OnInit {
+  productos: Producto[] = [];
+  productosFiltrados: Producto[] = [];
+  productosMostrados: Producto[] = [];
 
+  // Filtro
+  terminoBusqueda: string = '';
+
+  // Modales
+  displayEdit: boolean = false;
+  displayDelete: boolean = false;
+  displayNew: boolean = false;
+
+  // Producto Seleccionado
+  selectedProducto: Producto = {} as Producto;
+
+  // Paginación
+  first: number = 0;
+  rows: number = 8;
+
+  constructor(private productoService: ProductoService, private cdr: ChangeDetectorRef) { }
+
+  ngOnInit(): void {
+    this.cargarProductos();
+  }
+
+  cargarProductos(): void {
+    this.productoService.listarProductos().subscribe({
+      next: (data) => {
+        this.productos = data;
+        this.filtrar();
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  // Lógica de Búsqueda
+  filtrar(): void {
+    this.productosFiltrados = this.productos.filter(p =>
+      p.nombre.toLowerCase().includes(this.terminoBusqueda.toLowerCase())
+    );
+    this.first = 0;
+    this.actualizarVista();
+  }
+
+  actualizarVista(): void {
+    this.productosMostrados = this.productosFiltrados.slice(this.first, this.first + this.rows);
+  }
+
+  onPageChange(event: any): void {
+    this.first = event.first;
+    this.actualizarVista();
+  }
+
+  // Funciones de Modal
+  abrirEditar(producto: Producto): void {
+    this.selectedProducto = { ...producto }; // Copia para no editar el original antes de guardar
+    this.displayEdit = true;
+  }
+
+  confirmarEliminar(producto: Producto): void {
+    this.selectedProducto = producto;
+    this.displayDelete = true;
+  }
+
+  abrirNuevo(): void {
+    this.selectedProducto = {} as Producto;
+    this.displayNew = true;
+  }
+
+  eliminarProducto(): void {
+    this.productoService.eliminarProducto(this.selectedProducto.id).subscribe(() => {
+      this.cargarProductos();
+      this.displayDelete = false;
+    });
+  }
+
+  guardarCambios(): void {
+    // Aquí llamarías a tu servicio: this.productoService.actualizar(this.selectedProducto)...
+    console.log('Guardando:', this.selectedProducto);
+    this.displayEdit = false;
+  }
+
+  guardarNuevo(): void {
+    this.productoService.crearProducto(this.selectedProducto).subscribe(() => {
+      this.cargarProductos();
+      this.displayNew = false;
+    });
+  }
 }

@@ -1,5 +1,7 @@
 package com.example.vet.Model.GestionVentas;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -19,7 +21,7 @@ public class Producto {
     private String nombre;
 
     @NotBlank(message = "La descripción es obligatorio")
-    @Size(min = 2, max =255, message = "La descripción de tener entre 2 y 100 caracteres")
+    @Size(min = 2, max = 255, message = "La descripción de tener entre 2 y 100 caracteres")
     @Column(nullable = false, length = 255)
     private String descripcion;
 
@@ -34,5 +36,6 @@ public class Producto {
     private Integer stock;
 
     @Column(columnDefinition = "TEXT")
+    @JsonProperty("imagen_url")
     private String imagenUrl;
 }
