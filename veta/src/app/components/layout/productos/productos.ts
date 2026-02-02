@@ -89,19 +89,34 @@ export class Productos implements OnInit {
     this.productoService.eliminarProducto(this.selectedProducto.id).subscribe(() => {
       this.cargarProductos();
       this.displayDelete = false;
+      this.cdr.detectChanges();
     });
   }
 
   guardarCambios(): void {
-    // Aquí llamarías a tu servicio: this.productoService.actualizar(this.selectedProducto)...
-    console.log('Guardando:', this.selectedProducto);
-    this.displayEdit = false;
+    this.productoService.actualizarProducto(this.selectedProducto).subscribe({
+      next: (res) => {
+        console.log('Producto actualizado con éxito:', res);
+        setTimeout(() => {
+          this.displayEdit = false;
+          this.cargarProductos();
+          this.cdr.detectChanges();
+        }, 0);
+      },
+      error: (err) => console.error("Error al guardar:", err)
+    })
   }
 
   guardarNuevo(): void {
-    this.productoService.crearProducto(this.selectedProducto).subscribe(() => {
-      this.cargarProductos();
-      this.displayNew = false;
+    this.productoService.crearProducto(this.selectedProducto).subscribe({
+      next: (res) => {
+        setTimeout(() => {
+          this.displayNew = false;
+          this.cargarProductos();
+          this.cdr.detectChanges();
+        }, 0);
+      },
+      error: (err) => console.error("Error al guardar:", err)
     });
   }
 }
