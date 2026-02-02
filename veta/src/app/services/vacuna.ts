@@ -20,7 +20,7 @@ export class VacunaService {
   }
 
   crearVacuna(vacuna: Vacuna): Observable<Vacuna> {
-    return this.http.post<Vacuna>(this.apiUrl, vacuna);
+    return this.http.post<Vacuna>(`${this.apiUrl}/guardar`, vacuna);
   }
 
   actualizarVacuna(vacuna: Vacuna): Observable<Vacuna> {

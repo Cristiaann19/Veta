@@ -23,4 +23,22 @@ public class VacunaService {
     public VacunaCatalogo buscarPorId(Long id) {
         return vacunaRepository.findById(id).orElse(null);
     }
+
+    public void eliminar(Long id) {
+        vacunaRepository.deleteById(id);
+    }
+
+    public VacunaCatalogo actualizar(Long id, VacunaCatalogo vacuna) {
+        VacunaCatalogo vacunaExistente = buscarPorId(id);
+        if (vacunaExistente != null) {
+            vacunaExistente.setNombre(vacuna.getNombre());
+            vacunaExistente.setFabricante(vacuna.getFabricante());
+            vacunaExistente.setPrecio(vacuna.getPrecio());
+            vacunaExistente.setDosis(vacuna.getDosis());
+            vacunaExistente.setEdadRecomendada(vacuna.getEdadRecomendada());
+            vacunaExistente.setEnfermedadAsociada(vacuna.getEnfermedadAsociada());
+            return guardar(vacunaExistente);
+        }
+        return null;
+    }
 }
