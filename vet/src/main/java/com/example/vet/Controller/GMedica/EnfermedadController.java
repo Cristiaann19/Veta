@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/enfermedades")
-@CrossOrigin(origins = "*") // Importante para la Unidad 3 con Angular
+@CrossOrigin(origins = "*")
 public class EnfermedadController {
 
     @Autowired

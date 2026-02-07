@@ -1,7 +1,7 @@
 package com.example.vet.Model.GestionVentas;
 
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
@@ -13,15 +13,30 @@ public class Servicio {
     @GeneratedValue
     private Long id;
 
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
+    @Column(nullable = false, length = 100)
     private String nombre;
+
+    @NotBlank(message = "La descripción es obligatoria")
+    @Size(min = 2, max = 255, message = "La descripción debe tener entre 2 y 255 caracteres")
+    @Column(nullable = false, length = 255)
     private String descripcion;
+
+    @NotBlank(message = "El icono es obligatorio")
+    @Size(min = 2, max = 100, message = "El icono debe tener entre 2 y 100 caracteres")
+    @Column(nullable = false, length = 100)
     private String icono;
+
+    @NotNull(message = "El precio es obligatorio")
+    @Min(value = 0, message = "El precio debe ser mayor o igual a 0")
+    @Column(nullable = false)
     private Double precio;
 
     @Enumerated(EnumType.STRING)
     private EstadoServicio estado = EstadoServicio.ACTIVO;
 
-    public enum EstadoServicio{
+    public enum EstadoServicio {
         ACTIVO, INACTIVO
     }
 }

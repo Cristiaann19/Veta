@@ -1,33 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from "@angular/router";
-import { RouterLink } from "@angular/router";
-import { RouterLinkActive } from "@angular/router";
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './layout.html',
 })
 export class Layout implements OnInit {
-  titulo: string = 'Dashboard';
+  titulo: string = '';
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+    this.actualizarTitulo();
+
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      map(() => this.activatedRoute),
-      map(route => {
-        while (route.firstChild) route = route.firstChild;
-        return route;
-      }),
-      mergeMap(route => route.data)
-    ).subscribe(data => {
-      this.titulo = data['title'] || 'Veterinaria';
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.actualizarTitulo();
+    });
+  }
+
+  private actualizarTitulo(): void {
+    let route = this.activatedRoute.root;
+
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    route.data.subscribe(data => {
+      this.titulo = data['title'] || 'Panel Administrativo';
+      this.cdr.detectChanges();
     });
   }
 }

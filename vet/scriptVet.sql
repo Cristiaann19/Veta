@@ -2,12 +2,25 @@ create database veterinaria_web;
 -- drop database veterinaria_web;
 
 use veterinaria_web;
+select * from VACUNAS;
+
 
 --  MODELO DE INSERTS DE VACUNAS
 INSERT INTO vacunas (dosis,edad_recomendada,enfermedad_asociada,nombre, fabricante, precio) 
 VALUES (2,2,'Parvovirus','Antirrábica', 'Lab-Vet', 45.0);
+INSERT INTO vacunas(nombre, fabricante, enfermedad_asociada, edad_recomendada, dosis, precio) VALUES
+-- PERROS
+('Nobivac Puppy DP', 'MSD Animal Health', 'Parvovirus y Distemper', 1, 1, 45.00),
+('Vanguard Plus 5 (Quíntuple)', 'Zoetis', 'Distemper, Adenovirus, Parvovirus, Parainfluenza', 2, 1, 55.00),
+('Recombitek C6 (Séptuple)', 'Boehringer Ingelheim', 'Quíntuple + Lepto', 3, 1, 65.00),
+('Bronchi-Shield (KC)', 'Zoetis', 'Tos de las Perreras (Bordetella)', 3, 1, 40.00),
+('GiardiaVax', 'Zoetis', 'Giardia Lamblia', 4, 2, 50.00),
+('Felocell 3 (Triple Felina)', 'Zoetis', 'Rinotraqueitis, Calicivirus, Panleucopenia', 2, 1, 45.00),
+('Leucogen', 'Virbac', 'Leucemia Felina', 3, 1, 60.00),
+('Nobivac Tricat Trio', 'MSD', 'Calicivirus, Herpesvirus, Panleucopenia', 2, 1, 50.00),
+('Rabisin', 'Boehringer Ingelheim', 'Rabia', 4, 1, 35.00);
 
-INSERT INTO productos (nombre, descripcion, precio, stock, url_imagen) VALUES
+INSERT INTO productos (nombre, descripcion, precio, stock, imagen_url) VALUES
 ('Antiparasitarios', 'Protección completa contra pulgas y garrapatas.', 35.00, 100, 'https://www.latiendadefrida.com/cdn/shop/files/1200ftw-104722_1200x1200.jpg?v=1729201367'),
 ('Alimento Premium', 'Nutrición balanceada adulto raza mediana.', 85.00, 50, 'https://naricitas.pet/wp-content/uploads/2023/07/Canbo-Dog-Balance-Adulto-Razas-Medianas-y-Grandes-de-Pollo-3kg.jpg'),
 ('Shampoo Medicado', 'Tratamientos dermatológicos piel sensible.', 45.00, 30, 'https://oechsle.vteximg.com.br/arquivos/ids/17503990/imageUrl_1.jpg?v=638506051219770000'),

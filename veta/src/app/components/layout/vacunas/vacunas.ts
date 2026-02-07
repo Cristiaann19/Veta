@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // IMPORTANTE
+import { CommonModule } from '@angular/common';
 import { Vacuna } from '../../../models/vacuna';
 import { VacunaService } from '../../../services/vacuna';
 import { ChangeDetectorRef } from '@angular/core';
@@ -13,8 +13,9 @@ import { PaginatorModule } from 'primeng/paginator';
   selector: 'app-vacunas',
   standalone: true,
   imports: [CommonModule, FormsModule, DialogModule, ButtonModule, InputTextModule, PaginatorModule],
-  templateUrl: './vacunas.html',
+  templateUrl: './vacunas.html'
 })
+
 export class Vacunas implements OnInit {
   vacunas: Vacuna[] = [];
   vacunasFiltradas: Vacuna[] = [];
@@ -54,7 +55,8 @@ export class Vacunas implements OnInit {
 
   filtrar(): void {
     this.vacunasFiltradas = this.vacunas.filter(v =>
-      v.nombre.toLowerCase().includes(this.terminoBusqueda.toLowerCase())
+      v.nombre.toLowerCase().includes(this.terminoBusqueda.toLowerCase()) ||
+      v.enfermedadAsociada.toLowerCase().includes(this.terminoBusqueda.toLowerCase())
     );
     this.first = 0;
     this.actualizarVista();
@@ -70,7 +72,7 @@ export class Vacunas implements OnInit {
   }
 
   abrirEditar(vacuna: Vacuna): void {
-    this.selectedVacuna = { ...vacuna }; // Copia para no editar el original antes de guardar
+    this.selectedVacuna = { ...vacuna };
     this.displayEdit = true;
   }
 

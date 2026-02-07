@@ -25,13 +25,13 @@ public class Producto {
     @Column(nullable = false, length = 255)
     private String descripcion;
 
-    @NotBlank(message = "El precio es obligatorio")
+    @NotNull(message = "El precio es obligatorio")
     @Min(value = 0, message = "El precio deber ser mayor o igual a 0")
     @Column(nullable = false)
     private Double precio;
 
-    @NotBlank(message = "El stock es obligatorio")
-    @Size(min = 2, max = 100, message = "El stock debe ser mayor o igual a 0")
+    @NotNull(message = "El stock es obligatorio")
+    @Min(value = 0, message = "El stock debe ser mayor o igual a 0")
     @Column(nullable = false)
     private Integer stock;
 
