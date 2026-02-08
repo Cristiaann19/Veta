@@ -18,8 +18,23 @@ public class ServicioController {
         return servicioService.listarActivos();
     }
 
+    @GetMapping
+    public List<Servicio> listar() {
+        return servicioService.listar();
+    }
+
     @PostMapping
     public Servicio guardar(@RequestBody Servicio servicio) {
         return servicioService.guardar(servicio);
+    }
+
+    @PutMapping("/{id}")
+    public Servicio actualizar(@PathVariable Long id, @RequestBody Servicio servicio) {
+        return servicioService.actualizar(id, servicio);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id) {
+        servicioService.eliminar(id);
     }
 }

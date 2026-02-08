@@ -3,14 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-servicios',
   imports: [],
-  template: `
-    <div class="flex justify-between items-center mb-6">
-    <h3 class="text-lg font-bold">Lista de Servicios</h3>
-    <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary flex items-center gap-2">
-        <span class="material-symbols-outlined">add</span> Nuevo Servicio
-    </button>
-</div>
-  `
+  templateUrl: './servicios.html'
 })
 export class Servicios {
 

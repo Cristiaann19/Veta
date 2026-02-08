@@ -23,9 +23,7 @@ public class Servicio {
     @Column(nullable = false, length = 255)
     private String descripcion;
 
-    @NotBlank(message = "El icono es obligatorio")
-    @Size(min = 2, max = 100, message = "El icono debe tener entre 2 y 100 caracteres")
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100, columnDefinition = "varchar(100) default 'pets'")
     private String icono;
 
     @NotNull(message = "El precio es obligatorio")

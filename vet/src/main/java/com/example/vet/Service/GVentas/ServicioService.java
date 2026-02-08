@@ -17,5 +17,27 @@ public class ServicioService {
                 .toList();
     }
 
-    public Servicio guardar(Servicio s) { return servicioRepository.save(s); }
+    public List<Servicio> listar() {
+        return servicioRepository.findAll();
+    }
+
+    public Servicio guardar(Servicio s) {
+        return servicioRepository.save(s);
+    }
+
+    public Servicio actualizar(Long id, Servicio s) {
+        Servicio existente = servicioRepository.findById(id).orElse(null);
+        if (existente != null) {
+            existente.setNombre(s.getNombre());
+            existente.setDescripcion(s.getDescripcion());
+            existente.setPrecio(s.getPrecio());
+            existente.setEstado(s.getEstado());
+            return servicioRepository.save(existente);
+        }
+        return null;
+    }
+
+    public void eliminar(Long id) {
+        servicioRepository.deleteById(id);
+    }
 }
