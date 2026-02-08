@@ -1,22 +1,27 @@
 <!-- Área del Catálogo de Productos (para reemplazar solo el contenido interno) -->
 <div class="p-1">
     <!-- Header Section -->
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-                <h3 class="text-3xl font-bold text-emerald-500 mb-1">Catálogo de Productos</h3>
+                <h3
+                    class="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-2">
+                    Catálogo de Productos</h3>
                 <p class="text-gray-500 text-sm">Gestiona tu inventario de manera eficiente</p>
             </div>
 
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
-                <span class="relative w-full sm:w-90">
-                    <i class="pi pi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <div class="relative group w-full sm:w-80">
+                    <i
+                        class="pi pi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-emerald-500 transition-colors"></i>
                     <input type="text" [(ngModel)]="terminoBusqueda" (input)="filtrar()"
-                        class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all outline-none text-sm" />
-                </span>
+                        placeholder="Buscar producto..."
+                        class="w-full pl-11 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all outline-none text-sm bg-white/80 backdrop-blur-sm" />
+                </div>
                 <button (click)="abrirNuevo()"
-                    class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 font-semibold text-sm shadow-sm hover:shadow whitespace-nowrap">
-                    <span class="material-symbols-outlined text-base">add</span>
+                    class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-3 rounded-xl transition-all flex items-center justify-center gap-2 font-semibold text-sm shadow-lg shadow-emerald-200/50 hover:shadow-xl hover:shadow-emerald-300/50 hover:-translate-y-0.5 whitespace-nowrap group cursor-pointer">
+                    <span
+                        class="material-symbols-outlined text-lg group-hover:rotate-90 transition-transform">add</span>
                     Nuevo Producto
                 </button>
             </div>
@@ -54,12 +59,12 @@
                     <!-- Action Buttons -->
                     <div class="flex gap-2">
                         <button (click)="abrirEditar(p)"
-                            class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-1.5">
+                            class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer">
                             <i class="pi pi-pencil text-xs"></i>
                             Editar
                         </button>
                         <button (click)="confirmarEliminar(p)"
-                            class="px-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all">
+                            class="px-3 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all cursor-pointer">
                             <i class="pi pi-trash text-sm"></i>
                         </button>
                     </div>
