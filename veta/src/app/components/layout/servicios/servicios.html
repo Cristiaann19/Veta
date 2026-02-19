@@ -117,7 +117,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center gap-2">
-                                <button
+                                <button (click)="abrirEditar(servicio)"
                                     class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg text-xs font-semibold transition-all hover:shadow-lg hover:shadow-yellow-200 hover:-translate-y-0.5 group/btn cursor-pointer">
                                     <i class="pi pi-pencil text-xs group-hover/btn:rotate-12 transition-transform"></i>
                                 </button>
@@ -171,5 +171,79 @@
             styleClass="!bg-white !rounded-2xl !border !border-gray-200 !shadow-sm">
         </p-paginator>
     </div>
+
+    <p-dialog header="Editar Servicio" [(visible)]="displayEdit" [modal]="true" [style]="{width: '550px'}"
+        [draggable]="false" [resizable]="false" styleClass="modern-dialog">
+
+        <div class="flex flex-col gap-5 mt-4">
+            <!-- Nombre -->
+            <div class="field">
+                <label class="font-semibold text-gray-700 block mb-2 text-sm flex items-center gap-2">
+                    <i class="pi pi-tag text-emerald-500"></i>
+                    Nombre del Servicio
+                </label>
+                <input pInputText id="nombre" [(ngModel)]="selectedServicio.nombre"
+                    class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
+                    placeholder="Ej: Consulta General" autocomplete="off" />
+            </div>
+
+            <!-- Descripción -->
+            <div class="field">
+                <label class="font-semibold text-gray-700 block mb-2 text-sm flex items-center gap-2">
+                    <i class="pi pi-file-edit text-blue-500"></i>
+                    Descripción
+                </label>
+                <textarea pInputTextarea id="descripcion" [(ngModel)]="selectedServicio.descripcion" rows="4"
+                    class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all outline-none resize-none"
+                    placeholder="Describe el servicio en detalle..." autocomplete="off"></textarea>
+            </div>
+
+            <!-- Precio e Icono -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="field">
+                    <label class="font-semibold text-gray-700 block mb-2 text-sm flex items-center gap-2">
+                        <i class="pi pi-money-bill text-green-500"></i>
+                        Precio (S/)
+                    </label>
+                    <input pInputText id="precio" type="number" [(ngModel)]="selectedServicio.precio"
+                        class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
+                        placeholder="0.00" step="0.01" autocomplete="off" />
+                </div>
+                <div class="field">
+                    <label class="font-semibold text-gray-700 block mb-2 text-sm flex items-center gap-2">
+                        <i class="pi pi-star text-yellow-500"></i>
+                        Icono
+                    </label>
+                    <input pInputText id="icono" [(ngModel)]="selectedServicio.icono"
+                        class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
+                        placeholder="medical_services" autocomplete="off" />
+                </div>
+            </div>
+
+            <!-- Estado -->
+            <div class="field">
+                <label class="font-semibold text-gray-700 block mb-2 text-sm flex items-center gap-2">
+                    <i class="pi pi-circle text-purple-500"></i>
+                    Estado
+                </label>
+                <select id="estado" [(ngModel)]="selectedServicio.estado"
+                    class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 transition-all outline-none bg-white">
+                    <option value="ACTIVO">Activo</option>
+                    <option value="INACTIVO">Inactivo</option>
+                </select>
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <div class="flex gap-3 justify-end pt-4">
+                <button pButton label="Cancelar" icon="pi pi-times"
+                    class="px-6 py-2.5 rounded-xl border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-all font-semibold"
+                    (click)="displayEdit=false"></button>
+                <button pButton label="Guardar Cambios" icon="pi pi-check"
+                    class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:shadow-lg hover:shadow-emerald-200 transition-all font-semibold border-none"
+                    (click)="guardarCambios()"></button>
+            </div>
+        </ng-template>
+    </p-dialog>
 
 </div>

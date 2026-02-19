@@ -65,4 +65,23 @@ export class Servicios implements OnInit {
     this.rows = event.rows;
     this.actualizarVista();
   }
+
+  abrirEditar(servicio: Servicio): void {
+    this.selectedServicio = { ...servicio };
+    this.displayEdit = true;
+  }
+
+  guardarCambios(): void {
+    this.servicioService.actualizar(this.selectedServicio).subscribe({
+      next: (res) => {
+        console.log('Servicio actualizado con éxito:', res);
+        setTimeout(() => {
+          this.displayEdit = false;
+          this.cargarServicios();
+          this.cdr.detectChanges();
+        }, 0);
+      },
+      error: (err) => console.error('Error: ', err)
+    })
+  }
 }

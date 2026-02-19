@@ -23,8 +23,8 @@ export class ServiciosService {
     return this.http.post<Servicio>(this.apiUrl, servicio);
   }
 
-  actualizar(id: number, servicio: Servicio) {
-    return this.http.put<Servicio>(`${this.apiUrl}/${id}`, servicio);
+  actualizar(servicio: Servicio): Observable<Servicio> {
+    return this.http.put<Servicio>(`${this.apiUrl}/${servicio.id}`, servicio);
   }
 
   eliminar(id: number) {
