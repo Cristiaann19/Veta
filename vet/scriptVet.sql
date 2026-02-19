@@ -4,13 +4,11 @@ create database veterinaria_web;
 use veterinaria_web;
 select * from VACUNAS;
 
-
 --  MODELO DE INSERTS DE VACUNAS
-INSERT INTO vacunas (dosis,edad_recomendada,enfermedad_asociada,nombre, fabricante, precio) 
-VALUES (2,2,'Parvovirus','Antirrábica', 'Lab-Vet', 45.0);
 INSERT INTO vacunas(nombre, fabricante, enfermedad_asociada, edad_recomendada, dosis, precio) VALUES
 -- PERROS
 ('Nobivac Puppy DP', 'MSD Animal Health', 'Parvovirus y Distemper', 1, 1, 45.00),
+('Parvovirus','Antirrábica','Lab-Vet',2,2, 45.0),
 ('Vanguard Plus 5 (Quíntuple)', 'Zoetis', 'Distemper, Adenovirus, Parvovirus, Parainfluenza', 2, 1, 55.00),
 ('Recombitek C6 (Séptuple)', 'Boehringer Ingelheim', 'Quíntuple + Lepto', 3, 1, 65.00),
 ('Bronchi-Shield (KC)', 'Zoetis', 'Tos de las Perreras (Bordetella)', 3, 1, 40.00),
@@ -38,3 +36,14 @@ INSERT INTO productos (nombre, descripcion, precio, stock, imagen_url) VALUES
 ('Cama Ortopédica', 'Cama viscoelástica para perros mayores.', 200.00, 10, 'https://rimage.ripley.com.pe/home.ripley/Attachment/MKP/1465/PMP00002101393/full_image-1.jpeg'),
 ('Pipeta Frontline', 'Antipulgas tópico gatos.', 35.00, 90, 'https://static-shop.vivapets.com/media/catalog/product/cache/11fc96e7318a291175a0004e054be56e/f/r/frontline-dog-tri-act-20-40-kg-1-unity-w-3-pipettes.jpg');
 
+
+INSERT INTO servicios (nombre, descripcion, icono, precio, estado) VALUES
+('Consulta General', 'Chequeo completo de salud.', 'stethoscope', 50.00, 'ACTIVO'),
+('Vacunación', 'Aplicación de vacunas anuales.', 'vaccines', 45.00, 'ACTIVO'),
+('Profilaxis Dental', 'Limpieza profunda con ultrasonido.', 'dentistry', 120.00, 'ACTIVO'),
+('Cirugía Esterilización', 'Castración y Ovariohisterectomía.', 'medical_services', 250.00, 'ACTIVO'),
+('Baño y Corte (Grooming)', 'Corte de raza, baño medicado.', 'content_cut', 60.00, 'ACTIVO'),
+('Ecografía Abdominal', 'Imágenes de diagnóstico.', 'radiology', 100.00, 'ACTIVO'),
+('Rayos X', 'Placas radiográficas digitales.', 'skeleton', 80.00, 'ACTIVO'),
+('Análisis de Sangre', 'Hemograma y Bioquímica.', 'science', 70.00, 'ACTIVO'),
+('Hospedaje Diario', 'Cuidado por día incluye paseos.', 'home', 40.00, 'ACTIVO');
