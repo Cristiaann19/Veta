@@ -139,10 +139,10 @@
 
         <ng-template pTemplate="footer">
             <div class="flex gap-2 justify-end pt-4">
-                <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text text-gray-600 hover:bg-gray-50"
-                    (click)="displayEdit=false"></button>
+                <button pButton severity="secondary" label="Cancelar" icon="pi pi-times"
+                    class="p-button-text !text-gray-600 hover:!bg-gray-200" (click)="displayEdit=false"></button>
                 <button pButton label="Guardar Cambios" icon="pi pi-check"
-                    class="bg-blue-500 hover:bg-blue-600 text-white border-none" (click)="guardarCambios()"></button>
+                    class="!bg-[#0D72C5] hover:bg-blue-600 text-white !border-none" (click)="guardarCambios()"></button>
             </div>
         </ng-template>
     </p-dialog>
@@ -165,10 +165,10 @@
 
         <ng-template pTemplate="footer">
             <div class="flex gap-2 justify-center pt-4">
-                <button pButton label="Cancelar" class="p-button-text text-gray-600 hover:bg-gray-50"
-                    (click)="displayDelete=false"></button>
-                <button pButton label="Sí, eliminar" class="bg-red-500 hover:bg-red-600 text-white border-none"
-                    (click)="eliminarVacuna()"></button>
+                <button pButton severity="secondary" label="Cancelar"
+                    class="p-button-text !text-gray-600 hover:!bg-gray-200" (click)="displayDelete=false"></button>
+                <button pButton severity="secondary" label="Sí, eliminar"
+                    class="!bg-red-500 hover:!bg-red-600 !text-white border-none" (click)="eliminarVacuna()"></button>
             </div>
         </ng-template>
     </p-dialog>
@@ -226,7 +226,7 @@
         <ng-template pTemplate="footer">
             <div class="flex gap-2 justify-end pt-4">
                 <button pButton label="Cancelar" icon="pi pi-times" severity="secondary"
-                    class="p-button-text text-gray-600 hover:bg-gray-50" (click)="displayNew=false"></button>
+                    class="p-button-text !text-gray-600 hover:!bg-gray-200" (click)="displayNew=false"></button>
                 <button pButton label="Crear Vacuna" icon="pi pi-check"
                     class="!bg-[#0D72C5] hover:bg-blue-600 text-white !border-none" (click)="guardarNuevo()"></button>
             </div>
