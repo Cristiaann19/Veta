@@ -39,4 +39,11 @@ export class Layout implements OnInit {
       this.cdr.detectChanges();
     });
   }
+
+  sidebarOpen = true;
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
 }
+

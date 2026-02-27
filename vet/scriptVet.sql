@@ -2,7 +2,7 @@ create database veterinaria_web;
 -- drop database veterinaria_web;
 
 use veterinaria_web;
-select * from VACUNAS;
+select * from servicios;
 
 --  MODELO DE INSERTS DE VACUNAS
 INSERT INTO vacunas(nombre, fabricante, enfermedad_asociada, edad_recomendada, dosis, precio) VALUES

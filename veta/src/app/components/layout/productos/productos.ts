@@ -33,7 +33,7 @@ export class Productos implements OnInit {
 
   // Paginación
   first: number = 0;
-  rows: number = 8;
+  rows: number = 4;
 
   constructor(private productoService: ProductoService, private cdr: ChangeDetectorRef) { }
 
@@ -71,7 +71,7 @@ export class Productos implements OnInit {
 
   // Funciones de Modal
   abrirEditar(producto: Producto): void {
-    this.selectedProducto = { ...producto }; // Copia para no editar el original antes de guardar
+    this.selectedProducto = { ...producto };
     this.displayEdit = true;
   }
 
