@@ -3,6 +3,8 @@ create database veterinaria_web;
 
 use veterinaria_web;
 select * from servicios;
+select * from enfermedades;
+select * from especie_enfermedad;
 
 --  MODELO DE INSERTS DE VACUNAS
 INSERT INTO vacunas(nombre, fabricante, enfermedad_asociada, edad_recomendada, dosis, precio) VALUES
@@ -47,3 +49,31 @@ INSERT INTO servicios (nombre, descripcion, icono, precio, estado) VALUES
 ('Rayos X', 'Placas radiográficas digitales.', 'skeleton', 80.00, 'ACTIVO'),
 ('Análisis de Sangre', 'Hemograma y Bioquímica.', 'science', 70.00, 'ACTIVO'),
 ('Hospedaje Diario', 'Cuidado por día incluye paseos.', 'home', 40.00, 'ACTIVO');
+
+INSERT INTO especies (nombre) VALUES
+('Gato'),
+('Perro');
+
+INSERT INTO enfermedades (descripcion, gravedad, nombre) values 
+('Enfermedad viral grave que afecta intestinos','Alta','Parvovirus'),
+('Afecta sistemas respiratorios, gastrointestinal y nervioso','Alta','Distemper (Moquillo)'),
+('Inflamación del conducto auditivo','Baja','Otitis Externa'),
+('Enfermedad viral que afecta el sistema inmune','Alta','Leucemia Felina'),
+('Infeccion bacteriana transmitida por garrapatas, causa anemia','Media','Ehrlichia (Garrapata)'),
+('Ácaros que causan picazón intensa y pérdidad de pelo','Media','Sarna Sarcópita'),
+('Fallo en la funcion de los riñones','Alta','Insufencia Renal'),
+('Virus mortal que afecta el sistema nervioso central','Alta','Rabia');
+
+INSERT INTO especie_enfermedad (enfermedad_id, especie_id) VALUES
+(1,2),
+(2,2),
+(3,1),
+(3,2),
+(4,1),
+(5,2),
+(6,1),
+(6,2),
+(7,1),
+(8,1),
+(8,2);
+

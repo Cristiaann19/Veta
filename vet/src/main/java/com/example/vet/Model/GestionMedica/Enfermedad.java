@@ -3,6 +3,9 @@ package com.example.vet.Model.GestionMedica;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Data
 @Entity
@@ -23,10 +26,10 @@ public class Enfermedad {
     @Column(nullable = false, length = 255)
     private String descripcion;
 
-    @NotBlank(message = "La especie es obligatoria")
-    @Size(min = 2, max = 100, message = "La especie debe tener entre 2 y 100 caracteres")
-    @Column(nullable = false, length = 100)
-    private String especie;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @JoinTable(name = "especie_enfermedad", joinColumns = @JoinColumn(name = "enfermedad_id"), inverseJoinColumns = @JoinColumn(name = "especie_id"))
+    private List<Especie> especies;
 
     @NotBlank(message = "La gravedad es obligatoria")
     @Size(min = 2, max = 100, message = "La gravedad debe tener entre 2 y 100 caracteres")
