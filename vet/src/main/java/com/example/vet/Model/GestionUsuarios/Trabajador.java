@@ -2,33 +2,51 @@ package com.example.vet.Model.GestionUsuarios;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="trabajadores")
+@Table(name = "trabajadores")
 public class Trabajador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
+    @Pattern(regexp = "^\\d{8}$", message = "El DNI debe tener 8 digitos")
     private String dni;
+
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombres;
+
+    @NotBlank(message = "El apellido es obligatorio")
     private String apellidos;
 
     @Enumerated(EnumType.STRING)
     private cargoTrabajador cargo;
-    private String telefono;
-    private String correo;
-    private boolean activo = true;
 
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("usuario")
+    @NotBlank(message = "El telefono es obligatorio")
+    @Pattern(regexp = "^\\d{9}$", message = "El telefono debe tener 9 digitos")
+    private String telefono;
+
+    @NotBlank(message = "El correo es obligatorio")
+    @Email(message = "El correo debe ser valido")
+    private String correo;
+
+    @Enumerated(EnumType.STRING)
+    private estadoTrabajador estado;
+
+    @OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("trabajador")
     private Usuario usuario;
 
-    public enum cargoTrabajador{
-        VETERINARIO, ESTILISTA, CIRUJANO, RECEPCIONISTA, ADMINISTRADOR
+    // ENUMS PARA LA CLASE TRABAJADOR
+    public enum cargoTrabajador {
+        VETERINARIO, ESTILISTA, CIRUJANO, RECEPCIONISTA
+    }
+
+    public enum estadoTrabajador {
+        ACTIVO, INACTIVO
     }
 }
-

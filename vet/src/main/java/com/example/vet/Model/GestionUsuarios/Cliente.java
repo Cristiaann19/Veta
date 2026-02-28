@@ -3,6 +3,7 @@ package com.example.vet.Model.GestionUsuarios;
 import com.example.vet.Model.GestionMedica.Mascota;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.ToString;
 
@@ -11,21 +12,30 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="clientes")
+@Table(name = "clientes")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String dni;
 
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombres;
+
+    @NotBlank(message = "El apellido es obligatorio")
     private String apellidos;
+
+    @NotBlank(message = "La direccion es obligatoria")
     private String direccion;
+
+    @NotBlank(message = "El telefono es obligatorio")
+    @Pattern(regexp = "^\\d{9}$", message = "El telefono debe tener 9 digitos")
     private String telefono;
 
     @Column(unique = true)
+    @Email(message = "El correo debe ser valido")
     private String correo;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -35,6 +45,6 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonIgnore
     @ToString.Exclude
-    private List<Mascota> mascota = new ArrayList<>();
+    private List<Mascota> mascotas = new ArrayList<>();
 
 }

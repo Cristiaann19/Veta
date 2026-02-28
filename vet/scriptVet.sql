@@ -5,6 +5,8 @@ use veterinaria_web;
 select * from servicios;
 select * from enfermedades;
 select * from especie_enfermedad;
+select * from clientes;
+select * from roles;
 
 --  MODELO DE INSERTS DE VACUNAS
 INSERT INTO vacunas(nombre, fabricante, enfermedad_asociada, edad_recomendada, dosis, precio) VALUES
@@ -61,7 +63,7 @@ INSERT INTO enfermedades (descripcion, gravedad, nombre) values
 ('Enfermedad viral que afecta el sistema inmune','Alta','Leucemia Felina'),
 ('Infeccion bacteriana transmitida por garrapatas, causa anemia','Media','Ehrlichia (Garrapata)'),
 ('Ácaros que causan picazón intensa y pérdidad de pelo','Media','Sarna Sarcópita'),
-('Fallo en la funcion de los riñones','Alta','Insufencia Renal'),
+('Fallo en la funcion de los riñones','Alta','Insuficiencia Renal'),
 ('Virus mortal que afecta el sistema nervioso central','Alta','Rabia');
 
 INSERT INTO especie_enfermedad (enfermedad_id, especie_id) VALUES
@@ -76,4 +78,24 @@ INSERT INTO especie_enfermedad (enfermedad_id, especie_id) VALUES
 (7,1),
 (8,1),
 (8,2);
+
+INSERT INTO roles (nombre) VALUES 
+('ROLE_ADMIN'),
+('ROLE_USER'),
+('ROLE_VET');
+
+INSERT INTO trabajadores (apellidos, nombres, correo, cargo, dni, telefono, estado) VALUES 
+('ZUMAETA GOLAC','JUNIOR FERNANDO' ,'jufer@vethuellitas.com','VETERINARIO','71374454','987654321','ACTIVO'),
+('HUAMAN CRUZ', 'DENNIS FABRIZIO','fabrizio@vethuellitas.com','CIRUJANO','73381545','920625158','ACTIVO');
+
+INSERT INTO usuarios (username, password, trabajador_id, estado) VALUES
+('jufer','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',1,'ACTIVO'),
+('Dennis','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',2,'ACTIVO'),
+('chriso','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',NULL,'ACTIVO'); -- NULL PORQUE ES ADMIN
+
+INSERT INTO usuarios_roles (usuario_id, rol_id) VALUES 
+(1, 2), 
+(2, 2), 
+(3, 1);
+
 

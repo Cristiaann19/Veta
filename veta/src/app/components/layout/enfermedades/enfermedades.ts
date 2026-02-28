@@ -8,11 +8,12 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ChangeDetectorRef } from '@angular/core';
 import { EnfermedadesService } from '../../../services/enfermedades';
 import { Enfermedad } from '../../../models/enfermedad';
+import { TableModule } from "primeng/table";
 
 @Component({
   selector: 'app-enfermedades',
   standalone: true,
-  imports: [CommonModule, FormsModule, DialogModule, ButtonModule, InputTextModule, PaginatorModule],
+  imports: [CommonModule, FormsModule, DialogModule, ButtonModule, InputTextModule, PaginatorModule, TableModule],
   templateUrl: './enfermedades.html',
 })
 export class Enfermedades implements OnInit {

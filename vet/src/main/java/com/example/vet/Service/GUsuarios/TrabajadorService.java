@@ -13,8 +13,12 @@ public class TrabajadorService {
 
     public List<Trabajador> listarActivos() {
         return trabajadorRepository.findAll().stream()
-                .filter(Trabajador::isActivo)
+                .filter(trabajador -> trabajador.getEstado() == Trabajador.estadoTrabajador.ACTIVO)
                 .toList();
+    }
+
+    public List<Trabajador> listarTodos() {
+        return trabajadorRepository.findAll();
     }
 
     public Trabajador guardar(Trabajador trabajador) {

@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+    <!-- <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             @for(e of enfermedadesMostradas; track e.id){
             <div
@@ -95,6 +95,138 @@
             <p class="text-gray-500 text-sm">Intenta con nuevamente</p>
         </div>
         }
+    </div> -->
+
+    <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden p-4">
+        <div class="overflow-x-auto">
+            <p-table [value]="enfermedadesMostradas" [sortMode]="'single'" styleClass="modern-table">
+
+                <!-- Header -->
+                <ng-template pTemplate="header">
+                    <tr class="bg-gradient-to-r from-gray-50 to-gray-100/50 border-b-2 border-gray-200">
+
+                        <th pSortableColumn="nombre"
+                            class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors group">
+                            <div class="flex items-center gap-2">
+                                <i class="pi pi-heart text-[#0D72C5]"></i>
+                                Nombre
+                                <p-sortIcon field="nombre"
+                                    class="group-hover:text-[#0D72C5] transition-colors"></p-sortIcon>
+                            </div>
+                        </th>
+
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center gap-2">
+                                <i class="pi pi-file-edit text-blue-500"></i>
+                                Descripción
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="gravedad"
+                            class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors group">
+                            <div class="flex items-center gap-2">
+                                <i class="pi pi-exclamation-triangle text-orange-500"></i>
+                                Gravedad
+                                <p-sortIcon field="gravedad"
+                                    class="group-hover:text-[#0D72C5] transition-colors"></p-sortIcon>
+                            </div>
+                        </th>
+
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center gap-2">
+                                <i class="pi pi-tag text-purple-500"></i>
+                                Especies Afectadas
+                            </div>
+                        </th>
+
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center gap-2">
+                                <i class="pi pi-cog text-gray-500"></i>
+                                Acciones
+                            </div>
+                        </th>
+
+                    </tr>
+                </ng-template>
+
+                <!-- Body -->
+                <ng-template pTemplate="body" let-e>
+                    <tr
+                        class="border-b border-gray-100 hover:bg-gradient-to-r hover:from-blue-50/30 hover:to-blue-50/20 transition-all duration-200 group">
+
+                        <!-- Nombre -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shadow-sm flex-shrink-0">
+                                    <span
+                                        class="material-symbols-outlined text-[#0D72C5] text-lg">medical_services</span>
+                                </div>
+                                <div class="text-sm font-semibold text-gray-800">{{ e.nombre }}</div>
+                            </div>
+                        </td>
+
+                        <!-- Descripción -->
+                        <td class="px-6 py-4 max-w-xs">
+                            <div class="text-sm text-gray-600 line-clamp-2">{{ e.descripcion }}</div>
+                        </td>
+
+                        <!-- Gravedad -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="px-4 py-2 inline-flex items-center gap-2 rounded-full font-semibold text-xs border shadow-sm"
+                                [ngClass]="{
+                'bg-red-50 text-red-700 border-red-100':      e.gravedad === 'Alta' || e.gravedad === 'Crítica',
+                'bg-orange-50 text-orange-700 border-orange-100': e.gravedad === 'Media',
+                'bg-blue-50 text-[#0D72C5] border-blue-100':  e.gravedad === 'Baja'
+            }">
+                                <span class="w-2 h-2 rounded-full" [ngClass]="{
+                'bg-red-500 animate-pulse':    e.gravedad === 'Alta' || e.gravedad === 'Crítica',
+                'bg-orange-400 animate-pulse': e.gravedad === 'Media',
+                'bg-[#0D72C5]':                e.gravedad === 'Baja'
+                }">
+                                </span>
+                                {{ e.gravedad }}
+                            </span>
+                        </td>
+
+                        <!-- Especies -->
+                        <td class="px-6 py-4">
+                            <div class="flex flex-wrap gap-1.5 items-center min-h-[30px]">
+                                @for(especie of e.especies; track especie.id) {
+                                <span
+                                    class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[13px] font-semibold border whitespace-nowrap"
+                                    [ngClass]="{
+                'bg-orange-50 text-orange-700 border-orange-200': especie.nombre === 'Gato',
+                'bg-violet-50 text-violet-700 border-violet-200': especie.nombre === 'Perro'
+            }">
+                                    {{ especie.nombre }}
+                                </span>
+                                } @empty {
+                                <span class="text-xs text-gray-400 italic">No especificado</span>
+                                }
+                            </div>
+                        </td>
+
+                        <!-- Acciones -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center gap-2">
+                                <button
+                                    class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg text-xs font-semibold transition-all hover:shadow-lg hover:shadow-yellow-200 hover:-translate-y-0.5 group/btn cursor-pointer border-none">
+                                    <i class="pi pi-pencil text-xs group-hover/btn:rotate-12 transition-transform"></i>
+                                </button>
+                                <button
+                                    class="inline-flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-xs font-semibold transition-all hover:shadow-lg hover:shadow-red-200 hover:-translate-y-0.5 group/btn cursor-pointer border-none">
+                                    <i class="pi pi-trash text-xs group-hover/btn:scale-110 transition-transform"></i>
+                                </button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
     </div>
 
     <div class="mt-4">

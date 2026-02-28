@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Data
 @Entity
 @Table(name = "usuarios")
@@ -18,14 +20,22 @@ public class Usuario {
     @Column(nullable = false)
     private String password;
 
-    private boolean enabled = true;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles;
 
-    // para saber si un usuario es un trabajador
     @OneToOne
     @JoinColumn(name = "trabajador_id")
-    private Trabajador usuario;
+    private Trabajador trabajador;
+
+    @OneToOne(mappedBy = "usuario")
+    @JsonIgnore
+    private Cliente cliente;
+
+    @Enumerated(EnumType.STRING)
+    private estadoUsuario estado;
+
+    public enum estadoUsuario {
+        ACTIVO, INACTIVO
+    }
 }
