@@ -131,13 +131,12 @@
 
     <div class="mt-6">
         <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
-            [totalRecords]="serviciosFiltrados.length"
-            styleClass="!bg-white !rounded-2xl !border !border-gray-200 !shadow-sm">
+            [totalRecords]="serviciosFiltrados.length">
         </p-paginator>
     </div>
 
     <p-dialog header="Editar Servicio" [(visible)]="displayEdit" [modal]="true" [style]="{width: '550px'}"
-        [draggable]="false" [resizable]="false" styleClass="modern-dialog">
+        [draggable]="false" [resizable]="false" styleClass="modern-dialog">"
 
         <div class="flex flex-col gap-5 mt-4">
             <div class="field">
