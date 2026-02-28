@@ -94,8 +94,8 @@ INSERT INTO usuarios (username, password, trabajador_id, estado) VALUES
 ('chriso','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',NULL,'ACTIVO'); -- NULL PORQUE ES ADMIN
 
 INSERT INTO usuarios_roles (usuario_id, rol_id) VALUES 
-(1, 2), 
-(2, 2), 
+(1, 3), 
+(2, 3), 
 (3, 1);
 
 
