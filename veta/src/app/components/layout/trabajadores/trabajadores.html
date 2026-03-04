@@ -115,4 +115,10 @@
             </p-table>
         </div>
     </div>
+
+    <div class="mt-6">
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+            [totalRecords]="trabajadoresFiltrados.length">
+        </p-paginator>
+    </div>
 </div>

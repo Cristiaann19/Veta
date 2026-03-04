@@ -30,4 +30,5 @@ public class ClienteController {
         Cliente cliente = clienteService.buscarPorId(id);
         return cliente != null ? ResponseEntity.ok(cliente) : ResponseEntity.notFound().build();
     }
+
 }

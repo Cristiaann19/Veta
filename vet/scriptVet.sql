@@ -86,16 +86,51 @@ INSERT INTO roles (nombre) VALUES
 
 INSERT INTO trabajadores (apellidos, nombres, correo, cargo, dni, telefono, estado) VALUES 
 ('ZUMAETA GOLAC','JUNIOR FERNANDO' ,'jufer@vethuellitas.com','VETERINARIO','71374454','987654321','ACTIVO'),
-('HUAMAN CRUZ', 'DENNIS FABRIZIO','fabrizio@vethuellitas.com','CIRUJANO','73381545','920625158','ACTIVO');
+('HUAMAN CRUZ', 'DENNIS FABRIZIO','fabrizio@vethuellitas.com','CIRUJANO','73381545','920625158','ACTIVO'),
+('RAMIREZ LOPEZ','CARLA ANDREA','carla@vethuellitas.com','VETERINARIO','74561234','912345678','ACTIVO'),
+('TORRES VASQUEZ','LUIS MIGUEL','luis@vethuellitas.com','VETERINARIO','75678901','923456789','ACTIVO'),
+('CASTILLO RUIZ','MARIA FERNANDA','maria@vethuellitas.com','RECEPCIONISTA','76789012','934567890','ACTIVO'),
+('SANCHEZ DIAZ','JORGE ALBERTO','jorge@vethuellitas.com','CIRUJANO','77890123','945678901','ACTIVO'),
+('RODRIGUEZ PEREZ','ELENA SOFIA','elena@vethuellitas.com','ESTILISTA','78901234','956789012','ACTIVO'),
+('MENDOZA FLORES','RICARDO DANIEL','ricardo@vethuellitas.com','VETERINARIO','79012345','967890123','ACTIVO'),
+('GARCIA CHAVEZ','PAOLA ESTEFANIA','paola@vethuellitas.com','VETERINARIO','70123456','978901234','ACTIVO'),
+('VARGAS QUISPE','DIEGO ARMANDO','diego@vethuellitas.com','ESTILISTA','71234567','989012345','ACTIVO'),
+('RIVERA SALAZAR','ANA LUCIA','ana@vethuellitas.com','CIRUJANO','72345678','990123456','ACTIVO'),
+('ORTIZ CAMPOS','MARTIN EDUARDO','martin@vethuellitas.com','VETERINARIO','73456789','901234567','ACTIVO');
 
 INSERT INTO usuarios (username, password, trabajador_id, estado) VALUES
-('jufer','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',1,'ACTIVO'),
-('Dennis','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',2,'ACTIVO'),
-('chriso','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',NULL,'ACTIVO'); -- NULL PORQUE ES ADMIN
+('jufer','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',1,'ACTIVO'), -- trabajador
+('dennis','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',2,'ACTIVO'), -- trabajador
+('chriso','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',NULL,'ACTIVO'), -- NULL PORQUE ES ADMIN
+('carla','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',3,'ACTIVO'),
+('luis','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',4,'ACTIVO'),
+('maria','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',5,'ACTIVO'),
+('jorge','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',6,'ACTIVO'),
+('elena','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',7,'ACTIVO'),
+('ricardo','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',8,'ACTIVO'),
+('paola','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',9,'ACTIVO'),
+('diego','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',10,'ACTIVO'),
+('ana','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',11,'ACTIVO'),
+('martin','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',12,'ACTIVO');
 
 INSERT INTO usuarios_roles (usuario_id, rol_id) VALUES 
-(1, 3), 
-(2, 3), 
-(3, 1);
+(1,3), 
+(2,3), 
+(3,1),
+(4,3),
+(5,3),
+(6,3),
+(7,3),
+(8,3),
+(9,3),
+(10,3),
+(11,3),
+(12,3);
 
+-- INSERT INTO CLIENTES
+INSERT INTO clientes (apellidos, correo, direccion, dni, nombres, telefono, usuario_id) values
+('HUAMAN CRUZ','dennis@prueba.com','Incanato 1128',73381544,'DENNIS FABRIZIO','920625158',NULL),
+('VASQUEZ CARRASCO','emmy@emmy.com','Las Delicias',76296919,'ESMERALDA MARIA ROSINA','980228236',NULL);
+
+SELECT * FROM clientes
 

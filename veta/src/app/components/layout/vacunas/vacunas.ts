@@ -34,7 +34,7 @@ export class Vacunas implements OnInit {
 
   // Paginación
   first: number = 0;
-  rows: number = 4;
+  rows: number = 8;
 
   constructor(private vacunaService: VacunaService, private cdr: ChangeDetectorRef) { }
 
