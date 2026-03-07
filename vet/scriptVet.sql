@@ -53,8 +53,8 @@ INSERT INTO servicios (nombre, descripcion, icono, precio, estado) VALUES
 ('Hospedaje Diario', 'Cuidado por día incluye paseos.', 'home', 40.00, 'ACTIVO');
 
 INSERT INTO especies (nombre) VALUES
-('Gato'),
-('Perro');
+('Felina'),
+('Canina');
 
 INSERT INTO enfermedades (descripcion, gravedad, nombre) values 
 ('Enfermedad viral grave que afecta intestinos','Alta','Parvovirus'),
@@ -130,7 +130,49 @@ INSERT INTO usuarios_roles (usuario_id, rol_id) VALUES
 -- INSERT INTO CLIENTES
 INSERT INTO clientes (apellidos, correo, direccion, dni, nombres, telefono, usuario_id) values
 ('HUAMAN CRUZ','dennis@prueba.com','Incanato 1128',73381544,'DENNIS FABRIZIO','920625158',NULL),
-('VASQUEZ CARRASCO','emmy@emmy.com','Las Delicias',76296919,'ESMERALDA MARIA ROSINA','980228236',NULL);
+('VASQUEZ CARRASCO','emmy@emmy.com','Las Delicias',76296919,'ESMERALDA MARIA ROSINA','980228236',NULL),
+('PEREZ SOSA', 'perez.sosa@email.com', 'Calle Los Jazmines 450', '45871236', 'RICARDO ALBERTO', '987456123', NULL),
+('LOPEZ VILLEGAS', 'ana.lopez@email.com', 'Av. Santa Victoria 782', '71258963', 'ANA BEATRIZ', '951753852', NULL),
+('TORRES MENDOZA', 'mendoza.t@email.com', 'Urb. Las Garzas B-12', '10258744', 'LUIS ENRIQUE', '963258741', NULL),
+('CASTILLO DIAZ', 'c.diaz@email.com', 'Calle San Jose 115', '44859632', 'MARIA FERNANDA', '941258369', NULL),
+('SANCHEZ RUIZ', 'sanchez.r@email.com', 'Av. Jose Leonardo Ortiz 900', '72154863', 'CARLOS JAVIER', '932145687', NULL),
+('MORALES PAZ', 'mpaz@email.com', 'Calle Elvira Garcia 221', '09856321', 'GLADYS NOEMI', '914785236', NULL),
+('CAMPOS YOVERA', 'campos.y@email.com', 'Calle Tacna 556', '73365412', 'JOSE MIGUEL', '955441122', NULL),
+('DURAND SILVA', 'durand.s@email.com', 'Residencial La Ensenada', '46985214', 'PATRICIA ROSA', '988774411', NULL);
 
-SELECT * FROM clientes
+-- Verifica los IDs antes de insertar las mascotas
+SELECT id, nombres, apellidos FROM clientes;
 
+-- Mascotas para Ana (ID 1)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('4 años', 'Felina', 'Olenka', 'Sin observaciones médicas', 23.5, 'Naranjoso', 'Hembra', 1),
+('2 años', 'Felina', 'Apolo', 'Sin observaciones médicas', 23.5, 'Naranjoso', 'Macho', 1);
+-- Mascotas para Ana (ID 2)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('2 años', 'Canina', 'Peluche', 'Sin observaciones médicas', 23.5, 'Shih Tzu', 'Macho', 2),
+('3 años', 'Canina', 'Harry', 'Sin observaciones médicas', 23.5, 'Shih Tzu', 'Macho', 2);
+-- Mascotas para Ana (ID 3)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('5 años', 'Canina', 'Rambo', 'Alérgico al polen', 25.4, 'Boxer', 'Macho', 3);
+-- Mascotas para Ana (ID 4)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('3 años', 'Felina', 'Misi', 'Castrada recientemente', 3.8, 'Siamés', 'Hembra', 4),
+('2 meses', 'Felina', 'Pelusa', 'Cachorro sin vacunas', 0.9, 'Mestizo', 'Hembra', 4);
+-- Mascotas para Luis (ID 5)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('7 años', 'Canina', 'Bruno', 'Problemas de cadera', 30.2, 'Pastor Alemán', 'Macho', 5);
+-- Mascotas para Maria (ID 6)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('1 año', 'Canina', 'Chispita', 'Muy juguetona', 5.1, 'Poodle', 'Hembra', 6);
+-- Mascotas para Carlos (ID 7)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('4 años', 'Canina', 'Zeus', 'Requiere limpieza dental', 18.5, 'Bulldog Inglés', 'Macho', 7);
+-- Mascotas para Gladys (ID 8)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('6 años', 'Felina', 'Garfield', 'Sobrepeso leve', 7.2, 'Persa', 'Macho', 8);
+-- Mascotas para Jose (ID 9)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('2 años', 'Canina', 'Rex', 'Sin observaciones', 15.0, 'Schnauzer', 'Macho', 9);
+-- Mascotas para Patricia (ID 10)
+INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('8 años', 'Canina', 'Pelusa', 'Soplo al corazón leve', 10.4, 'Cocker Spaniel', 'Hembra', 10);

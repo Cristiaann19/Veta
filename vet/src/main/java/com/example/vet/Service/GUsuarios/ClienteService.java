@@ -1,5 +1,6 @@
 package com.example.vet.Service.GUsuarios;
 
+import com.example.vet.DTO.ClienteDTO;
 import com.example.vet.Model.GestionUsuarios.Cliente;
 import com.example.vet.Repository.GUsuarios.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,9 @@ public class ClienteService {
 
     public Cliente buscarPorId(Long id) {
         return clienteRepository.findById(id).orElse(null);
+    }
+
+    public List<ClienteDTO> listarTodosConContador() {
+        return clienteRepository.findAllClientesConContador();
     }
 }

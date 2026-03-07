@@ -1,6 +1,130 @@
-<div class="flex justify-between items-center mb-6">
-    <h3 class="text-lg font-bold">Lista de Mascotas</h3>
-    <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary flex items-center gap-2">
-        <span class="material-symbols-outlined">pets</span> Nueva Mascota
-    </button>
+<div class="p-1">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-6">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h3
+                    class="text-4xl font-bold bg-gradient-to-r from-[#0D72C5] to-[#0a5a9c] bg-clip-text text-transparent mb-2">
+                    Expediente de Mascotas
+                </h3>
+                <p class="text-gray-500 text-sm">Listado general de pacientes registrados en el sistema</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+                <div class="relative group w-full sm:w-80">
+                    <i
+                        class="pi pi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors"></i>
+                    <input type="text" placeholder="Buscar por mascota o dueño..." [(ngModel)]="terminoBusqueda"
+                        (input)="filtrar()"
+                        class="w-full pl-11 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm bg-white/80 backdrop-blur-sm" />
+                </div>
+                <button (click)="abrirNuevo()"
+                    class="bg-[#0D72C5] text-white px-6 py-3 rounded-xl transition-all flex items-center justify-center gap-2 font-semibold text-sm shadow-lg shadow-blue-200/50 hover:shadow-xl hover:shadow-blue-300/50 hover:-translate-y-0.5 whitespace-nowrap group cursor-pointer">
+                    <span
+                        class="material-symbols-outlined text-lg group-hover:rotate-360 transition-transform">pets</span>
+                    Nueva Mascota
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden p-4">
+        <div class="overflow-x-auto">
+            <p-table [value]="mascotasMostradas" [sortMode]="'single'" class="w-full" styleClass="p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider">
+                        <th pSortableColumn="nombre"
+                            class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+                            Mascota <p-sortIcon field="nombre"></p-sortIcon>
+                        </th>
+                        <th class="px-6 py-4 text-left font-bold">Especie / Raza</th>
+                        <th pSortableColumn="cliente.apellidos"
+                            class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+                            Dueño Responsable <p-sortIcon field="cliente.apellidos"></p-sortIcon>
+                        </th>
+                        <th class="px-6 py-4 text-left font-bold">Info Física</th>
+                        <th class="px-6 py-4 text-center font-bold">Acciones</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-m>
+                    <tr class="border-b border-gray-100 hover:bg-blue-50/30 transition-all group">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                                    <span class="material-symbols-outlined">{{ m.especie === 'Canina' ?
+                                        'sound_detection_dog_barking' : 'pets'
+                                        }}</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-gray-900">{{ m.nombre }}</span>
+                                    <span class="text-[10px] text-gray-400 uppercase font-bold">{{ m.sexo }}</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="px-6 py-4">
+                            <div class="flex flex-col">
+                                <span
+                                    class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-[11px] font-bold w-fit mb-1">
+                                    {{ m.especie }}
+                                </span>
+                                <span class="text-xs text-gray-500 italic">{{ m.raza }}</span>
+                            </div>
+                        </td>
+
+                        <td class="px-6 py-4">
+                            <div class="flex flex-col">
+                                <span class="text-sm font-medium text-gray-700">{{ m.cliente?.nombres }} {{
+                                    m.cliente?.apellidos }}</span>
+                                <span class="text-xs text-blue-500 font-medium">DNI: {{ m.cliente?.dni }}</span>
+                            </div>
+                        </td>
+
+                        <td class="px-6 py-4">
+                            <div class="flex gap-4 text-sm text-gray-600">
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-xs text-gray-400">monitor_weight</span>
+                                    {{ m.peso }}kg
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-xs text-gray-400">calendar_month</span>
+                                    {{ m.edad }}
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex justify-center gap-2">
+                                <button (click)="verHistorial(m)"
+                                    class="p-2 text-green-500 hover:bg-green-50 rounded-lg transition-colors"
+                                    title="Ver Historial">
+                                    <span class="material-symbols-outlined text-lg">description</span>
+                                </button>
+                                <button (click)="abrirEditar(m)"
+                                    class="p-2 text-indigo-500 hover:bg-indigo-50 rounded-lg transition-colors"
+                                    title="Editar">
+                                    <span class="material-symbols-outlined text-lg">edit</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        @if (mascotasMostradas.length === 0) {
+        <div class="text-center py-16">
+            <div class="inline-block p-5 bg-gray-100 rounded-full mb-3">
+                <span class="material-symbols-outlined text-gray-400 !text-4xl">pets</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-700 mb-2">No se encontraron mascotas</h3>
+            <p class="text-gray-500">Intenta ajustar tu búsqueda o crea una nueva mascota</p>
+        </div>
+        }
+    </div>
+    <div class="mt-6">
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+            [totalRecords]="mascotasFiltradas.length">
+        </p-paginator>
+    </div>
 </div>

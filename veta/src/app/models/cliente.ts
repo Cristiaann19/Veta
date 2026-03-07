@@ -7,4 +7,5 @@ export interface Cliente {
     telefono: string;
     correo: string;
     usuario?: any;
+    totalMascotas: number;
 }

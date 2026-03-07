@@ -1,5 +1,6 @@
 package com.example.vet.Controller.GUsuarios;
 
+import com.example.vet.DTO.ClienteDTO;
 import com.example.vet.Model.GestionUsuarios.Cliente;
 import com.example.vet.Service.GUsuarios.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,6 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping
-    public List<Cliente> listar() {
-        return clienteService.listarTodos();
-    }
-
     @PostMapping
     public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente) {
         return ResponseEntity.ok(clienteService.guardar(cliente));
@@ -29,6 +25,11 @@ public class ClienteController {
     public ResponseEntity<Cliente> obtenerPorId(@PathVariable Long id) {
         Cliente cliente = clienteService.buscarPorId(id);
         return cliente != null ? ResponseEntity.ok(cliente) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping
+    public List<ClienteDTO> listar() {
+        return clienteService.listarTodosConContador();
     }
 
 }
