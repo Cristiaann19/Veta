@@ -18,7 +18,7 @@ public class Cita {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime fechaHora;
 
-    private String servicioId;
+    private Long servicioId;
     private String servicioNombre;
     private Double precioAcordado;
     private String motivo;

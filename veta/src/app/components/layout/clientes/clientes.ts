@@ -4,20 +4,35 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Cliente } from '../../../models/cliente';
 import { ClienteService } from '../../../services/cliente-service';
+import {Paginator} from 'primeng/paginator';
 
 @Component({
   selector: 'app-clientes',
   standalone: true,
-  imports: [TableModule, CommonModule, FormsModule],
+  imports: [TableModule, CommonModule, FormsModule, Paginator],
   templateUrl: './clientes.html'
 })
 export class Clientes implements OnInit {
-  private clienteService = inject(ClienteService);
-  private cdr = inject(ChangeDetectorRef);
 
   clientes: Cliente[] = [];
+  clientesMostrados: Cliente[] = [];
   clientesFiltrados: Cliente[] = [];
   terminoBusqueda: string = '';
+
+  //modales
+  displayEdit : boolean = false;
+  displayDelete : boolean = false;
+  displayNew : boolean = false;
+
+  /*enfermedad seleccionada*/
+  selectedCliente: Cliente  = {} as Cliente;
+
+  //Paginacion
+  first: number = 0
+  rows: number = 8
+
+  constructor(private clienteService: ClienteService, private cdr: ChangeDetectorRef) {
+  }
 
   ngOnInit(): void {
     this.cargarClientes();
@@ -46,8 +61,18 @@ export class Clientes implements OnInit {
     );
   }
 
+  onPageChange(event : any):void{
+    this.first = event.first;
+    this.actualizarVista();
+  }
+
+  actualizarVista():void{
+    this.clientesMostrados=this.clientesFiltrados.slice(this.first,this.first + this.rows);
+  }
+
   // Métodos para botones (Próximamente diálogos)
   abrirNuevo() { console.log('Nuevo cliente'); }
   abrirEditar(cliente: Cliente) { console.log('Editar', cliente); }
   confirmarEliminar(cliente: Cliente) { console.log('Eliminar', cliente); }
+
 }

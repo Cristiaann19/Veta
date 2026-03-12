@@ -29,7 +29,7 @@ export const routes: Routes = [
             { path: 'trabajadores', component: Trabajadores, data: { title: 'Gestion de Trabajadores' } },
             { path: 'productos', component: Productos, data: { title: 'Gestion de Productos' } },
             { path: 'ventas', component: Ventas, data: { title: 'Gestion de Ventas' } },
-            { path: 'citas', component: Citas, data: { title: 'Gestion de Citas' } },
+            { path: 'citas', component: Citas, data: { title: 'Gestion de Cita' } },
             { path: 'servicios', component: Servicios, data: { title: 'Gestion de Servicios' } },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]

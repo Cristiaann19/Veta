@@ -27,7 +27,7 @@ export class Trabajadores implements OnInit {
   displayDelete: boolean = false;
   displayNew: boolean = false;
 
-  //enfermedad seleccionada
+  //trabajador seleccionada
   selectedTrabajador: Trabajador = {} as Trabajador;
 
   //paginacion

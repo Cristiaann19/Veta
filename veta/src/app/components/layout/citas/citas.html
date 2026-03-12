@@ -1,6 +1,180 @@
-<div class="flex justify-between items-center mb-6">
-    <h3 class="text-lg font-bold">Agenda de Citas</h3>
-    <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary flex items-center gap-2">
-        <span class="material-symbols-outlined">calendar_add_on</span> Nueva Cita
-    </button>
+<div class="p-1">
+  <!-- Header -->
+  <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-6">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <h3 class="text-4xl font-bold bg-gradient-to-r from-[#0D72C5] to-[#0a5a9c] bg-clip-text text-transparent mb-2">
+          Lista de Citas
+        </h3>
+        <p class="text-gray-500 text-sm">Revisa las citas que se han registrado previamente.</p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+        <div class="relative group w-full sm:w-80">
+          <i class="pi pi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors"></i>
+          <input
+            type="text"
+            placeholder="Buscar cita..."
+            [(ngModel)]="terminoBusqueda"
+            (input)="filtrar()"
+            class="w-full pl-11 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none text-sm bg-white/80 backdrop-blur-sm"
+          />
+        </div>
+        <button
+          (click)="displayNew = true"
+          class="bg-[#0D72C5] text-white px-6 py-3 rounded-xl transition-all flex items-center justify-center gap-2 font-semibold text-sm shadow-lg shadow-blue-200/50 hover:shadow-xl hover:shadow-blue-300/50 hover:-translate-y-0.5 whitespace-nowrap group cursor-pointer">
+          <span class="material-symbols-outlined text-lg group-hover:rotate-90 transition-transform">add</span>
+          Nueva Cita
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden p-4">
+    <div class="overflow-x-auto">
+      <p-table [value]="citasMostradas" [sortMode]="'single'" class="w-full" styleClass="modern-table">
+
+        <!-- Encabezados -->
+        <ng-template pTemplate="header">
+          <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider">
+
+            <th pSortableColumn="fechaHora"
+                class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+              Fecha y Hora <p-sortIcon field="fechaHora"></p-sortIcon>
+            </th>
+            <th pSortableColumn="mascotaNombre"
+                class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+              Mascota <p-sortIcon field="mascotaNombre"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="clienteNombre"
+                class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+              Cliente <p-sortIcon field="clienteNombre"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="servicioNombre"
+                class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+              Servicio <p-sortIcon field="servicioNombre"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="trabajadorNombre"
+                class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+              Veterinario <p-sortIcon field="trabajadorNombre"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="precioAcordado"
+                class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+              Precio <p-sortIcon field="precioAcordado"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="estado"
+                class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+              Estado <p-sortIcon field="estado"></p-sortIcon>
+            </th>
+
+            <th class="px-6 py-4 text-center font-bold">Acciones</th>
+          </tr>
+        </ng-template>
+
+        <!-- Filas -->
+        <ng-template pTemplate="body" let-c>
+          <tr class="border-b border-gray-100 hover:bg-blue-50/30 transition-all group">
+
+            <!-- Fecha y Hora -->
+            <td class="px-6 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+              <div class="flex flex-col">
+                <span class="font-semibold">{{ c.fechaHora | date: 'dd/MM/yyyy' }}</span>
+                <span class="text-xs text-gray-400">{{ c.fechaHora | date: 'HH:mm' }}</span>
+              </div>
+            </td>
+            <!-- Mascota -->
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-medium text-gray-700">{{ c.mascotaNombre }}</span>
+              </div>
+            </td>
+
+            <!-- Cliente -->
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-medium text-black font-bold">{{ c.clienteNombre }}</span>
+              </div>
+            </td>
+
+            <!-- Servicio -->
+            <td class="px-6 py-4">
+              <span class="px-3 py-1 rounded-lg bg-blue-50 text-blue-600 text-xs font-bold uppercase border border-blue-100">
+                {{ c.servicioNombre }}
+              </span>
+            </td>
+
+            <!-- Veterinario -->
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-green-400 text-base">stethoscope</span>
+                <span class="text-sm font-medium text-gray-700">{{ c.trabajadorNombre }}</span>
+              </div>
+            </td>
+
+            <!-- Precio -->
+            <td class="px-6 py-4 text-sm font-semibold text-gray-700 whitespace-nowrap">
+              S/ {{ c.precioAcordado | number: '1.2-2' }}
+            </td>
+
+            <!-- Estado -->
+            <td class="px-6 py-4">
+              <div [ngClass]="{
+                'text-yellow-700 bg-yellow-100 border-yellow-200': c.estado === 'PENDIENTE',
+                'text-blue-700   bg-blue-100   border-blue-200':   c.estado === 'CONFIRMADA',
+                'text-green-700  bg-green-100  border-green-200':  c.estado === 'REALIZADA',
+                'text-red-600    bg-red-100    border-red-200':    c.estado === 'CANCELADA'
+              }" class="px-3 py-1 inline-block rounded-full font-bold text-[10px] uppercase border">
+                {{ c.estado }}
+              </div>
+            </td>
+
+            <!-- Acciones -->
+            <td class="px-6 py-4 text-center">
+              <div class="flex justify-center gap-2">
+                <button
+                  (click)="selectedCita = c; displayEdit = true"
+                  class="p-2 text-indigo-500 hover:bg-indigo-50 rounded-lg transition-colors cursor-pointer"
+                  title="Editar">
+                  <span class="material-symbols-outlined text-lg">edit</span>
+                </button>
+                <button
+                  (click)="selectedCita = c; displayDelete = true"
+                  class="p-2 text-red-400 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                  title="Eliminar">
+                  <span class="material-symbols-outlined text-lg">delete</span>
+                </button>
+              </div>
+            </td>
+
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <!-- Empty state -->
+    @if (citasMostradas.length === 0) {
+      <div class="text-center py-12">
+        <div class="inline-block p-5 bg-gray-100 rounded-full mb-3">
+          <i class="pi pi-calendar !text-4xl !text-gray-300"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-700 mb-2">No se encontraron citas</h3>
+        <p class="text-gray-500">Intenta ajustar tu búsqueda o crea una nueva</p>
+      </div>
+    }
+
+    <!-- Paginador -->
+    <p-paginator
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="citasFiltradas.length"
+      (onPageChange)="onPageChange($event)"
+      class="mt-4">
+    </p-paginator>
+  </div>
 </div>

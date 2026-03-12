@@ -28,7 +28,7 @@
 
     <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden p-4">
         <div class="overflow-x-auto">
-            <p-table [value]="clientesFiltrados" [sortMode]="'single'" class="w-full" styleClass="p-datatable-sm">
+            <p-table [value]="clientesMostrados" [sortMode]="'single'" class="w-full" styleClass="p-datatable-sm">
                 <ng-template pTemplate="header">
                     <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider">
                         <th pSortableColumn="dni"
@@ -91,5 +91,10 @@
                 </ng-template>
             </p-table>
         </div>
+    </div>
+    <div class="mt-6">
+      <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+                   [totalRecords]="clientesFiltrados.length">
+      </p-paginator>
     </div>
 </div>
