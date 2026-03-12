@@ -2,6 +2,9 @@ package com.example.vet.Service.GMedica;
 
 import com.example.vet.Model.GestionMedica.VacunaCatalogo;
 import com.example.vet.Repository.GMedica.VacunaRepository;
+import com.example.vet.Service.GVentas.ProductoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -9,26 +12,33 @@ import java.util.List;
 @Service
 public class VacunaService {
 
+    private static final Logger logger = LoggerFactory.getLogger(VacunaService.class);
+
     @Autowired
     private VacunaRepository vacunaRepository;
 
     public List<VacunaCatalogo> listarTodas() {
+        logger.info("Vacunas listadas");
         return vacunaRepository.findAll();
     }
 
     public VacunaCatalogo guardar(VacunaCatalogo vacuna) {
+        logger.info("Vacuna guardada");
         return vacunaRepository.save(vacuna);
     }
 
     public VacunaCatalogo buscarPorId(Long id) {
+        logger.info("Vacuna Buscada por ID");
         return vacunaRepository.findById(id).orElse(null);
     }
 
     public void eliminar(Long id) {
+        logger.info("Vacuna eliminadas");
         vacunaRepository.deleteById(id);
     }
 
     public VacunaCatalogo actualizar(Long id, VacunaCatalogo vacuna) {
+        logger.info("Vacuna actualizada");
         VacunaCatalogo vacunaExistente = buscarPorId(id);
         if (vacunaExistente != null) {
             vacunaExistente.setNombre(vacuna.getNombre());

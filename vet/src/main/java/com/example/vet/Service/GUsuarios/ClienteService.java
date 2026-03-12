@@ -3,20 +3,27 @@ package com.example.vet.Service.GUsuarios;
 import com.example.vet.DTO.ClienteDTO;
 import com.example.vet.Model.GestionUsuarios.Cliente;
 import com.example.vet.Repository.GUsuarios.ClienteRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class ClienteService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ClienteService.class);
+
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<Cliente> listarTodos() {
-        return clienteRepository.findAll();
+    public List<ClienteDTO> listarTodosConContador() {
+        logger.info("CLIENTES MOSTRADOS");
+        return clienteRepository.findAllClientesConContador();
     }
 
     public Cliente guardar(Cliente cliente) {
+        logger.info("CLIENTE GUARDADO CORRECTAMENTE");
         return clienteRepository.save(cliente);
     }
 
@@ -24,7 +31,4 @@ public class ClienteService {
         return clienteRepository.findById(id).orElse(null);
     }
 
-    public List<ClienteDTO> listarTodosConContador() {
-        return clienteRepository.findAllClientesConContador();
-    }
 }

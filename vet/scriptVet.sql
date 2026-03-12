@@ -140,39 +140,25 @@ INSERT INTO clientes (apellidos, correo, direccion, dni, nombres, telefono, usua
 ('CAMPOS YOVERA', 'campos.y@email.com', 'Calle Tacna 556', '73365412', 'JOSE MIGUEL', '955441122', NULL),
 ('DURAND SILVA', 'durand.s@email.com', 'Residencial La Ensenada', '46985214', 'PATRICIA ROSA', '988774411', NULL);
 
--- Verifica los IDs antes de insertar las mascotas
-SELECT id, nombres, apellidos FROM clientes;
-
--- Mascotas para Ana (ID 1)
+-- INSERT INTO DE MASCOTAS
 INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
 ('4 años', 'Felina', 'Olenka', 'Sin observaciones médicas', 23.5, 'Naranjoso', 'Hembra', 1),
-('2 años', 'Felina', 'Apolo', 'Sin observaciones médicas', 23.5, 'Naranjoso', 'Macho', 1);
--- Mascotas para Ana (ID 2)
-INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('2 años', 'Felina', 'Apolo', 'Sin observaciones médicas', 23.5, 'Naranjoso', 'Macho', 1), 
 ('2 años', 'Canina', 'Peluche', 'Sin observaciones médicas', 23.5, 'Shih Tzu', 'Macho', 2),
-('3 años', 'Canina', 'Harry', 'Sin observaciones médicas', 23.5, 'Shih Tzu', 'Macho', 2);
--- Mascotas para Ana (ID 3)
-INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
-('5 años', 'Canina', 'Rambo', 'Alérgico al polen', 25.4, 'Boxer', 'Macho', 3);
--- Mascotas para Ana (ID 4)
-INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('3 años', 'Canina', 'Harry', 'Sin observaciones médicas', 23.5, 'Shih Tzu', 'Macho', 2),
+('5 años', 'Canina', 'Rambo', 'Alérgico al polen', 25.4, 'Boxer', 'Macho', 3),
 ('3 años', 'Felina', 'Misi', 'Castrada recientemente', 3.8, 'Siamés', 'Hembra', 4),
-('2 meses', 'Felina', 'Pelusa', 'Cachorro sin vacunas', 0.9, 'Mestizo', 'Hembra', 4);
--- Mascotas para Luis (ID 5)
-INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
-('7 años', 'Canina', 'Bruno', 'Problemas de cadera', 30.2, 'Pastor Alemán', 'Macho', 5);
--- Mascotas para Maria (ID 6)
-INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
-('1 año', 'Canina', 'Chispita', 'Muy juguetona', 5.1, 'Poodle', 'Hembra', 6);
--- Mascotas para Carlos (ID 7)
-INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
-('4 años', 'Canina', 'Zeus', 'Requiere limpieza dental', 18.5, 'Bulldog Inglés', 'Macho', 7);
--- Mascotas para Gladys (ID 8)
-INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
-('6 años', 'Felina', 'Garfield', 'Sobrepeso leve', 7.2, 'Persa', 'Macho', 8);
--- Mascotas para Jose (ID 9)
-INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
-('2 años', 'Canina', 'Rex', 'Sin observaciones', 15.0, 'Schnauzer', 'Macho', 9);
--- Mascotas para Patricia (ID 10)
-INSERT INTO mascotas (edad, especie, nombre, observaciones, peso, raza, sexo, cliente_id) VALUES 
+('2 meses', 'Felina', 'Pelusa', 'Cachorro sin vacunas', 0.9, 'Mestizo', 'Hembra', 4),
+('7 años', 'Canina', 'Bruno', 'Problemas de cadera', 30.2, 'Pastor Alemán', 'Macho', 5),
+('1 año', 'Canina', 'Chispita', 'Muy juguetona', 5.1, 'Poodle', 'Hembra', 6),
+('4 años', 'Canina', 'Zeus', 'Requiere limpieza dental', 18.5, 'Bulldog Inglés', 'Macho', 7), 
+('6 años', 'Felina', 'Garfield', 'Sobrepeso leve', 7.2, 'Persa', 'Macho', 8),
+('2 años', 'Canina', 'Rex', 'Sin observaciones', 15.0, 'Schnauzer', 'Macho', 9), 
 ('8 años', 'Canina', 'Pelusa', 'Soplo al corazón leve', 10.4, 'Cocker Spaniel', 'Hembra', 10);
+
+select * from Citas;
+
+INSERT INTO citas (estado,fecha_hora,motivo,precio_acordado,servicio_id,servicio_nombre,mascota_id, trabajador_id) VALUES
+('REALIZADA','2026-04-11','Corte de Verano',25.6,5,'Baño y Corte',3,12);
+
+
