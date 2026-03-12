@@ -17,25 +17,25 @@ public class ServicioService {
     private ServicioRepository servicioRepository;
 
     public List<Servicio> listarActivos() {
-        logger.info("MOSTRANDO PRODUCTOS (ACTIVOS)");
+        logger.info("MOSTRANDO SERVICIOS (ACTIVOS)");
         return servicioRepository.findAll().stream()
                 .filter(s -> s.getEstado().equals(Servicio.EstadoServicio.ACTIVO))
                 .toList();
     }
 
     public List<Servicio> listar() {
-        logger.info("MOSTRANDO TODOS PRODUCTOS");
+        logger.info("MOSTRANDO TODOS LOS SERVICIOS");
         return servicioRepository.findAll();
     }
 
     public Servicio guardar(Servicio s) {
-        logger.info("PRODUCTO GUARDADO");
+        logger.info("SERVICIO GUARDADO");
         return servicioRepository.save(s);
     }
 
     public Servicio actualizar(Long id, Servicio s) {
         Servicio existente = servicioRepository.findById(id).orElse(null);
-        logger.info("");
+        logger.info("SERVICIO ACTUALIZADO - " + s.getNombre());
         if (existente != null) {
             existente.setNombre(s.getNombre());
             existente.setDescripcion(s.getDescripcion());
