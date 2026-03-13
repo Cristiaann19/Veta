@@ -48,11 +48,11 @@ INSERT INTO servicios (nombre, descripcion, icono, precio, estado) VALUES
 ('Vacunación', 'Aplicación de vacunas anuales.', 'vaccines', 45.00, 'ACTIVO'),
 ('Profilaxis Dental', 'Limpieza profunda con ultrasonido.', 'dentistry', 120.00, 'ACTIVO'),
 ('Cirugía Esterilización', 'Castración y Ovariohisterectomía.', 'medical_services', 250.00, 'ACTIVO'),
-('Baño y Corte (Grooming)', 'Corte de raza, baño medicado.', 'content_cut', 60.00, 'ACTIVO'),
+('Baño y Corte', 'Corte de raza, baño medicado.', 'content_cut', 60.00, 'ACTIVO'),
 ('Ecografía Abdominal', 'Imágenes de diagnóstico.', 'radiology', 100.00, 'ACTIVO'),
 ('Rayos X', 'Placas radiográficas digitales.', 'skeleton', 80.00, 'ACTIVO'),
 ('Análisis de Sangre', 'Hemograma y Bioquímica.', 'science', 70.00, 'ACTIVO'),
-('Hospedaje Diario', 'Cuidado por día incluye paseos.', 'home', 40.00, 'ACTIVO');
+('Hospedaje', 'Cuidado por día incluye paseos.', 'home', 40.00, 'ACTIVO');
 
 INSERT INTO especies (nombre) VALUES
 ('Felina'),
@@ -101,8 +101,8 @@ INSERT INTO trabajadores (apellidos, nombres, correo, cargo, dni, telefono, esta
 ('RIVERA SALAZAR','ANA LUCIA','ana@vethuellitas.com','CIRUJANO','72345678','990123456','ACTIVO');
 
 INSERT INTO usuarios (username, password, trabajador_id, estado) VALUES
-('jufer','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',1,'ACTIVO'), -- trabajador
-('dennis','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',2,'ACTIVO'), -- trabajador
+('jufer','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',1,'ACTIVO'),
+('dennis','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',2,'ACTIVO'), 
 ('chriso','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',NULL,'ACTIVO'), -- NULL PORQUE ES ADMIN
 ('carla','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',3,'ACTIVO'),
 ('luis','$2a$12$fIpHfhGambfFnIAXfn/sQuxP1LKWjttL9YKmaFO5QdETmyFg2qOCm',4,'ACTIVO'),
@@ -131,7 +131,7 @@ INSERT INTO usuarios_roles (usuario_id, rol_id) VALUES
 
 -- INSERT INTO CLIENTES
 INSERT INTO clientes (apellidos, correo, direccion, dni, nombres, telefono, usuario_id) values
-('HUAMAN CRUZ','dennis@prueba.com','Incanato 1128',73381544,'DENNIS FABRIZIO','920625158',NULL),
+('HUAMAN CRUZ','dennis@prueba.com','Incanato 1128',73381545,'DENNIS FABRIZIO','920625158',NULL),
 ('VASQUEZ CARRASCO','emmy@emmy.com','Las Delicias',76296919,'ESMERALDA MARIA ROSINA','980228236',NULL),
 ('PEREZ SOSA', 'perez.sosa@email.com', 'Calle Los Jazmines 450', '45871236', 'RICARDO ALBERTO', '987456123', NULL),
 ('LOPEZ VILLEGAS', 'ana.lopez@email.com', 'Av. Santa Victoria 782', '71258963', 'ANA BEATRIZ', '951753852', NULL),

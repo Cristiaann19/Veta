@@ -25,11 +25,6 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.guardar(producto));
     }
 
-    @PutMapping("/{id}/stock")
-    public void actualizarStock(@PathVariable Long id, @RequestParam Integer cantidad) {
-        productoService.actualizarStock(id, cantidad);
-    }
-
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         productoService.eliminar(id);

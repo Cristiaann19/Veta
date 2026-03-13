@@ -1,18 +1,22 @@
 package com.example.vet.Service.GUsuarios;
 import com.example.vet.DTO.CitaDTO;
 import com.example.vet.DTO.CitaRequestDTO;
+import com.example.vet.DTO.DashboardDTO;
 import com.example.vet.Model.GestionMedica.Mascota;
 import com.example.vet.Model.GestionUsuarios.Cita;
 import com.example.vet.Model.GestionUsuarios.Trabajador;
 import com.example.vet.Model.GestionVentas.Servicio;
 import com.example.vet.Repository.GMedica.MascotaRepository;
 import com.example.vet.Repository.GUsuarios.CitaRepository;
+import com.example.vet.Repository.GUsuarios.ClienteRepository;
 import com.example.vet.Repository.GUsuarios.TrabajadorRepository;
 import com.example.vet.Repository.GUsuarios.TrabajadorServicioRepository;
 import com.example.vet.Repository.GVentas.ServicioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +34,9 @@ public class CitaService {
 
     @Autowired
     private TrabajadorRepository trabajadorRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Autowired
     private TrabajadorServicioRepository trabajadorServicioRepository;
@@ -126,5 +133,41 @@ public class CitaService {
         cita.setEstado(Cita.EstadoCita.PENDIENTE);
 
         return toDTO(citaRepository.save(cita));
+    }
+
+    public DashboardDTO getDashboard() {
+        LocalDate hoy = LocalDate.now();
+        LocalDateTime inicioHoy = hoy.atStartOfDay();
+        LocalDateTime finHoy = hoy.atTime(23, 59, 59);
+
+        LocalDateTime inicioMes = hoy.withDayOfMonth(1).atStartOfDay();
+        LocalDateTime finMes = hoy.withDayOfMonth(
+                hoy.lengthOfMonth()).atTime(23, 59, 59);
+
+        DashboardDTO dto = new DashboardDTO();
+
+        // Citas de hoy
+        List<Cita> citasHoy = citaRepository
+                .findByFechaHoraBetween(inicioHoy, finHoy);
+        dto.setCitasHoy(citasHoy.size());
+        dto.setCitasDeHoy(citasHoy.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList()));
+
+        // Ventas del mes (solo REALIZADAS)
+        double ventas = citaRepository
+                .findByFechaHoraBetween(inicioMes, finMes)
+                .stream()
+                .filter(c -> c.getEstado() == Cita.EstadoCita.REALIZADA)
+                .filter(c -> c.getServicio() != null)
+                .mapToDouble(c -> c.getServicio().getPrecio())
+                .sum();
+        dto.setVentasMes(ventas);
+
+        // Clientes y mascotas
+        dto.setClientesActivos(clienteRepository.count());
+        dto.setTotalMascotas(mascotaRepository.count());
+
+        return dto;
     }
 }

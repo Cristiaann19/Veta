@@ -27,16 +27,6 @@ public class ProductoService {
         return productoRepository.save(p);
     }
 
-    //Revisar
-    public void actualizarStock(Long id, Integer cantidad) {
-        logger.info("Stock actualizado: ", cantidad);
-        Producto p = productoRepository.findById(id).orElse(null);
-        if (p != null) {
-            p.setStock(p.getStock() - cantidad);
-            productoRepository.save(p);
-        }
-    }
-
     public void eliminar(Long id) {
         logger.info("Producto Eliminado");
         productoRepository.deleteById(id);
