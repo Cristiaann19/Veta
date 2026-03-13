@@ -18,27 +18,26 @@ public class VacunaService {
     private VacunaRepository vacunaRepository;
 
     public List<VacunaCatalogo> listarTodas() {
-        logger.info("Vacunas listadas");
+        logger.info("VACUNAS LISTADAS");
         return vacunaRepository.findAll();
     }
 
     public VacunaCatalogo guardar(VacunaCatalogo vacuna) {
-        logger.info("Vacuna guardada");
+        logger.info("VACUNA GUARDADA");
         return vacunaRepository.save(vacuna);
     }
 
     public VacunaCatalogo buscarPorId(Long id) {
-        logger.info("Vacuna Buscada por ID");
+        logger.info("VACUNA BUSCADA POR ID");
         return vacunaRepository.findById(id).orElse(null);
     }
 
     public void eliminar(Long id) {
-        logger.info("Vacuna eliminadas");
+        logger.info("VACUNA ELIMINADAS");
         vacunaRepository.deleteById(id);
     }
 
     public VacunaCatalogo actualizar(Long id, VacunaCatalogo vacuna) {
-        logger.info("Vacuna actualizada");
         VacunaCatalogo vacunaExistente = buscarPorId(id);
         if (vacunaExistente != null) {
             vacunaExistente.setNombre(vacuna.getNombre());

@@ -9,6 +9,7 @@ select * from enfermedades;
 select * from especie_enfermedad;
 select * from clientes;
 select * from roles;
+select * from trabajador_servicio;
 
 --  MODELO DE INSERTS DE VACUNAS
 INSERT INTO vacunas(nombre, fabricante, enfermedad_asociada, edad_recomendada, dosis, precio) VALUES

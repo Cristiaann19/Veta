@@ -3,6 +3,7 @@ package com.example.vet.Controller.GUsuarios;
 import com.example.vet.Model.GestionUsuarios.Trabajador;
 import com.example.vet.Service.GUsuarios.TrabajadorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -22,5 +23,11 @@ public class TrabajadorController {
     @PostMapping
     public Trabajador guardar(@RequestBody Trabajador trabajador) {
         return trabajadorService.guardar(trabajador);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        trabajadorService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

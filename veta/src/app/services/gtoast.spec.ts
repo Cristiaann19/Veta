@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EnfermedadesService } from './enfermedades';
+import { GToast } from './gtoast';
 
-describe('EnfermedadesService', () => {
-  let service: EnfermedadesService;
+describe('GToast', () => {
+  let service: GToast;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EnfermedadesService);
+    service = TestBed.inject(GToast);
   });
 
   it('should be created', () => {

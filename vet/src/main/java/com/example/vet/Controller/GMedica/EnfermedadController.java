@@ -1,5 +1,7 @@
 package com.example.vet.Controller.GMedica;
 
+import com.example.vet.DTO.EnfermedadDTO;
+import com.example.vet.DTO.EnfermedadRequestDTO;
 import com.example.vet.Model.GestionMedica.Enfermedad;
 import com.example.vet.Service.GMedica.EnfermedadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,12 @@ public class EnfermedadController {
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         enfermedadService.eliminar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EnfermedadDTO> actualizar(
+            @PathVariable Long id,
+            @RequestBody EnfermedadRequestDTO request) {
+        return ResponseEntity.ok(enfermedadService.actualizar(id, request));
     }
 }

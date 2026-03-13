@@ -6,20 +6,41 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
 import { ChangeDetectorRef } from '@angular/core';
-import { EnfermedadesService } from '../../../services/enfermedades';
+import { EnfermedadesService } from '../../../services/enfermedades-service';
 import { Enfermedad } from '../../../models/enfermedad';
 import { TableModule } from "primeng/table";
+import { HttpClient } from '@angular/common/http';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { GToast } from '../../../services/gtoast';
+import { inject } from '@angular/core';
+
+
+interface EspecieDTO {
+  id: number;
+  nombre: string;
+}
+
+interface EnfermedadDTO {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  gravedad: string;
+  especies: EspecieDTO[];
+}
+
 
 @Component({
   selector: 'app-enfermedades',
   standalone: true,
-  imports: [CommonModule, FormsModule, DialogModule, ButtonModule, InputTextModule, PaginatorModule, TableModule],
+  imports: [CommonModule,MultiSelectModule  ,FormsModule, DialogModule, ButtonModule, InputTextModule, PaginatorModule, TableModule],
   templateUrl: './enfermedades.html',
 })
 export class Enfermedades implements OnInit {
   enfermedades: Enfermedad[] = [];
   enfermedadesFiltradas: Enfermedad[] = [];
   enfermedadesMostradas: Enfermedad[] = [];
+  especies: EspecieDTO[] = [];
+  selectedEspeciesIds: number[] = [];
 
   //filtro
   terminoBusqueda: string = '';
@@ -36,26 +57,32 @@ export class Enfermedades implements OnInit {
   first: number = 0;
   rows: number = 8;
 
-  constructor(private enfermedadesService: EnfermedadesService, private cdr: ChangeDetectorRef) { }
+  private toast = inject(GToast);
+
+  constructor(private enfermedadesService: EnfermedadesService, private cdr: ChangeDetectorRef, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.cargarEnfermedades();
+    this.cargarEspecies();
   }
 
+
   cargarEnfermedades(): void {
-    this.enfermedadesService.listarEnfermedades().subscribe({
-      next: (data) => {
-        this.enfermedades = data;
-        this.filtrar();
-        this.cdr.detectChanges();
-      },
-      error: (err) => console.error('Error:', err)
-    });
+    this.http.get<EnfermedadDTO[]>('http://localhost:8080/api/enfermedades')
+      .subscribe({
+        next: (data) => {
+          setTimeout(() => {
+            this.enfermedades = data;
+            this.filtrar();
+            this.cdr.detectChanges();
+          }, 0);
+        },
+        error: (err) => console.error(err)
+      });
   }
 
   filtrar(): void {
     const termino = this.terminoBusqueda.toLowerCase();
-
     this.enfermedadesFiltradas = this.enfermedades.filter(e => {
       const coincideNombre = e.nombre.toLowerCase().includes(termino);
       const coincideEspecie = e.especies && e.especies.some(especie =>
@@ -76,4 +103,85 @@ export class Enfermedades implements OnInit {
     this.first = event.first;
     this.actualizarVista();
   }
+
+  //PARA LOS MODALES
+  abrirNuevo() : void{
+    this.displayNew = true;
+    this.selectedEnfermedad = {} as Enfermedad;
+  }
+
+  confirmarEliminar(enfermedad : Enfermedad): void{
+    this.selectedEnfermedad = enfermedad;
+    this.displayDelete = true;
+  }
+
+  //METHODS
+  eliminarEnfermedad() : void {
+    this.enfermedadesService.eliminarEnfermedad(this.selectedEnfermedad.id).subscribe(() =>{
+      console.log('Enfermedad eliminada: ', this.selectedEnfermedad);
+      this.toast.success("Enfermedad eliminada");
+      setTimeout(()=>{
+        this.displayDelete = false;
+        this.cargarEnfermedades();
+        this.cdr.detectChanges();
+      },0)
+    })
+  }
+
+
+  guardarNuevo(): void {
+    this.enfermedadesService.crearEnfermedad(this.selectedEnfermedad).subscribe(() => {
+      setTimeout(() => {
+        this.displayNew = false;
+        this.cargarEnfermedades();
+        this.cdr.detectChanges();
+      }, 0);
+    });
+  }
+
+  cargarEspecies(): void {
+    this.http.get<EspecieDTO[]>('http://localhost:8080/api/especies')
+      .subscribe({
+        next: (data) => {
+          setTimeout(() => {        // ← agregar esto
+            this.especies = data;
+            this.cdr.detectChanges();
+          }, 0);
+        },
+        error: (err) => console.error(err)
+      });
+  }
+
+  abrirEditar(enfermedad: EnfermedadDTO): void {
+    this.selectedEnfermedad = { ...enfermedad };
+    this.selectedEspeciesIds = enfermedad.especies
+      ? enfermedad.especies.map(e => e.id)
+      : [];
+    this.displayEdit = true;
+
+  }
+
+  guardarCambios(): void {
+    const request = {
+      nombre: this.selectedEnfermedad.nombre,
+      descripcion: this.selectedEnfermedad.descripcion,
+      gravedad: this.selectedEnfermedad.gravedad,
+      especiesIds: this.selectedEspeciesIds
+    };
+
+    this.http.put(`http://localhost:8080/api/enfermedades/${this.selectedEnfermedad.id}`, request)
+      .subscribe({
+        next: () => {
+          setTimeout(() => {
+            this.displayEdit = false;
+            this.cargarEnfermedades();
+            this.cdr.detectChanges();
+          }, 0);
+        },
+        error: (err) => this.toast.error(err)
+      });
+    this.toast.success("Enfermedad guardada correctamente")
+  }
+
+
 }
