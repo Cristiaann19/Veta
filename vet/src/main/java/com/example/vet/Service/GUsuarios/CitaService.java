@@ -1,7 +1,15 @@
 package com.example.vet.Service.GUsuarios;
 import com.example.vet.DTO.CitaDTO;
+import com.example.vet.DTO.CitaRequestDTO;
+import com.example.vet.Model.GestionMedica.Mascota;
 import com.example.vet.Model.GestionUsuarios.Cita;
+import com.example.vet.Model.GestionUsuarios.Trabajador;
+import com.example.vet.Model.GestionVentas.Servicio;
+import com.example.vet.Repository.GMedica.MascotaRepository;
 import com.example.vet.Repository.GUsuarios.CitaRepository;
+import com.example.vet.Repository.GUsuarios.TrabajadorRepository;
+import com.example.vet.Repository.GUsuarios.TrabajadorServicioRepository;
+import com.example.vet.Repository.GVentas.ServicioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +22,18 @@ public class CitaService {
     @Autowired
     private CitaRepository citaRepository;
 
+    @Autowired
+    private MascotaRepository mascotaRepository;
+
+    @Autowired
+    private ServicioRepository servicioRepository;
+
+    @Autowired
+    private TrabajadorRepository trabajadorRepository;
+
+    @Autowired
+    private TrabajadorServicioRepository trabajadorServicioRepository;
+
     public List<CitaDTO> listarCitas() {
         return citaRepository.findAll()
                 .stream()
@@ -25,8 +45,6 @@ public class CitaService {
         CitaDTO dto = new CitaDTO();
         dto.setId(cita.getId());
         dto.setFechaHora(cita.getFechaHora());
-        dto.setServicioNombre(cita.getServicioNombre());
-        dto.setPrecioAcordado(cita.getPrecioAcordado());
         dto.setMotivo(cita.getMotivo());
         dto.setEstado(cita.getEstado().name());
 
@@ -54,6 +72,59 @@ public class CitaService {
             );
         }
 
+        // Dentro de toDTO() — verifica que tengas esto
+        if (cita.getServicio() != null) {
+            dto.setServicioId(cita.getServicio().getId());
+            dto.setServicioNombre(cita.getServicio().getNombre());
+            dto.setPrecioServicio(cita.getServicio().getPrecio());
+        }
+
         return dto;
+    }
+
+
+    public CitaDTO crearCita(CitaRequestDTO request) {
+
+        // 1. Validar que la mascota existe
+        Mascota mascota = mascotaRepository.findById(request.getMascotaId())
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+
+        // 2. Validar que el servicio existe y está activo
+        Servicio servicio = servicioRepository.findById(request.getServicioId())
+                .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
+
+        if (servicio.getEstado() == Servicio.EstadoServicio.INACTIVO) {
+            throw new RuntimeException("El servicio no está disponible");
+        }
+
+        // 3. Validar que el trabajador existe y está activo
+        Trabajador trabajador = trabajadorRepository.findById(request.getTrabajadorId())
+                .orElseThrow(() -> new RuntimeException("Trabajador no encontrado"));
+
+        if (trabajador.getEstado() == Trabajador.estadoTrabajador.INACTIVO) {
+            throw new RuntimeException("El trabajador no está disponible");
+        }
+
+        // 4. Validar que ese trabajador realmente ofrece ese servicio
+        boolean puedeRealizarlo = trabajadorServicioRepository
+                .existsByTrabajadorIdAndServicioId(
+                        request.getTrabajadorId(),
+                        request.getServicioId()
+                );
+
+        if (!puedeRealizarlo) {
+            throw new RuntimeException("El trabajador no ofrece este servicio");
+        }
+
+        // 5. Crear y guardar la cita
+        Cita cita = new Cita();
+        cita.setMascota(mascota);
+        cita.setServicio(servicio);
+        cita.setTrabajador(trabajador);
+        cita.setFechaHora(request.getFechaHora());
+        cita.setMotivo(request.getMotivo());
+        cita.setEstado(Cita.EstadoCita.PENDIENTE);
+
+        return toDTO(citaRepository.save(cita));
     }
 }

@@ -1,8 +1,13 @@
 package com.example.vet.Model.GestionVentas;
 
+import com.example.vet.Model.GestionUsuarios.TrabajadorServicio;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -30,6 +35,10 @@ public class Servicio {
     @Min(value = 0, message = "El precio debe ser mayor o igual a 0")
     @Column(nullable = false)
     private Double precio;
+
+    @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("servicio")
+    private List<TrabajadorServicio> trabajadores = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private EstadoServicio estado = EstadoServicio.ACTIVO;

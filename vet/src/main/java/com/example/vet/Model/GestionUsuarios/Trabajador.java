@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "trabajadores")
@@ -40,6 +43,10 @@ public class Trabajador {
     @OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("trabajador")
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("trabajador")
+    private List<TrabajadorServicio> servicios = new ArrayList<>();
 
     // ENUMS PARA LA CLASE TRABAJADOR
     public enum cargoTrabajador {

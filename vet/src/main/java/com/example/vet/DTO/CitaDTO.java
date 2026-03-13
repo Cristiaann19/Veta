@@ -8,20 +8,23 @@ import java.time.LocalDateTime;
 public class CitaDTO {
     private Long id;
     private LocalDateTime fechaHora;
-    private String servicioNombre;
-    private Double precioAcordado;
     private String motivo;
     private String estado;
+
+    // Servicio ← agregar servicioId
+    private Long servicioId;
+    private String servicioNombre;
+    private Double precioServicio; // renombrar de precioAcordado
 
     // Mascota
     private Long mascotaId;
     private String mascotaNombre;
 
-    // Cliente (dueño de la mascota)
+    // Cliente
     private Long clienteId;
-    private String clienteNombre;    // nombre completo del dueño
+    private String clienteNombre;
 
     // Trabajador
     private Long trabajadorId;
-    private String trabajadorNombre; // nombre completo del trabajador
+    private String trabajadorNombre;
 }

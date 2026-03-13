@@ -55,7 +55,10 @@ export class Citas implements OnInit {
   filtrar():void{
     const termino = this.terminoBusqueda.toLowerCase();
     this.citasFiltradas = this.citas.filter(c =>
-      c.servicioNombre.toLowerCase().includes(termino));
+      c.servicioNombre.toLowerCase().includes(termino)||
+      c.mascotaNombre.toLowerCase().includes(termino) ||
+      c.clienteNombre.toLowerCase().includes(termino));
+    this.first = 0;
     this.actualizarVista();
   }
   onPageChange(event: any): void {

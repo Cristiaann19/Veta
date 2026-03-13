@@ -39,18 +39,13 @@
         <ng-template pTemplate="header">
           <tr class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider">
 
-            <th pSortableColumn="fechaHora"
+            <th
                 class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
-              Fecha y Hora <p-sortIcon field="fechaHora"></p-sortIcon>
+              ID
             </th>
             <th pSortableColumn="mascotaNombre"
                 class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
               Mascota <p-sortIcon field="mascotaNombre"></p-sortIcon>
-            </th>
-
-            <th pSortableColumn="clienteNombre"
-                class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
-              Cliente <p-sortIcon field="clienteNombre"></p-sortIcon>
             </th>
 
             <th pSortableColumn="servicioNombre"
@@ -63,9 +58,13 @@
               Veterinario <p-sortIcon field="trabajadorNombre"></p-sortIcon>
             </th>
 
-            <th pSortableColumn="precioAcordado"
+            <th pSortableColumn="fechaHora"
                 class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
-              Precio <p-sortIcon field="precioAcordado"></p-sortIcon>
+              Fecha <p-sortIcon field="fechaHora"></p-sortIcon>
+            </th>
+
+            <th class="px-6 py-4 text-left font-bold cursor-pointer hover:bg-gray-100 transition-colors">
+              Precio
             </th>
 
             <th pSortableColumn="estado"
@@ -83,22 +82,14 @@
 
             <!-- Fecha y Hora -->
             <td class="px-6 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-              <div class="flex flex-col">
-                <span class="font-semibold">{{ c.fechaHora | date: 'dd/MM/yyyy' }}</span>
-                <span class="text-xs text-gray-400">{{ c.fechaHora | date: 'HH:mm' }}</span>
-              </div>
-            </td>
-            <!-- Mascota -->
-            <td class="px-6 py-4">
-              <div class="flex items-center gap-2">
-                <span class="text-sm font-medium text-gray-700">{{ c.mascotaNombre }}</span>
-              </div>
+              <span class="font-semibold">{{c.id}}</span>
             </td>
 
-            <!-- Cliente -->
+            <!-- Mascota (INFO) -->
             <td class="px-6 py-4">
-              <div class="flex items-center gap-2">
-                <span class="text-sm font-medium text-black font-bold">{{ c.clienteNombre }}</span>
+              <div class="flex flex-col">
+                <span class="text-sm font-bold text-black">{{ c.mascotaNombre }}</span>
+                <span class="text-xs text-gray-500">{{c.clienteNombre}}</span>
               </div>
             </td>
 
@@ -117,9 +108,16 @@
               </div>
             </td>
 
+            <td class="px-6 py-4">
+              <div class="flex flex-col">
+                <span class="font-semibold">{{ c.fechaHora | date: 'dd/MM/yyyy' }}</span>
+                <span class="text-xs text-gray-400">{{ c.fechaHora | date: 'HH:mm' }}</span>
+              </div>
+            </td>
+
             <!-- Precio -->
             <td class="px-6 py-4 text-sm font-semibold text-gray-700 whitespace-nowrap">
-              S/ {{ c.precioAcordado | number: '1.2-2' }}
+              S/ {{ c.precioServicio | number: '1.2-2' }}
             </td>
 
             <!-- Estado -->
