@@ -32,7 +32,6 @@ public class EnfermedadService {
     }
 
     public Enfermedad guardar (Enfermedad enfermedad){
-        logger.info("Nueva enfermedad registrada", enfermedad);
         return enfermedadRepository.save(enfermedad);
     }
 
@@ -75,6 +74,19 @@ public class EnfermedadService {
             return edto;
         }).collect(Collectors.toList()));
         return dto;
+    }
+    public EnfermedadDTO crear(EnfermedadRequestDTO request) {
+        Enfermedad enfermedad = new Enfermedad();
+        logger.info("Nueva enfermedad registrada", enfermedad);
+        enfermedad.setNombre(request.getNombre());
+        enfermedad.setDescripcion(request.getDescripcion());
+        enfermedad.setGravedad(request.getGravedad());
+
+        List<Especie> especies = especieRepository.findAllById(request.getEspeciesIds());
+        enfermedad.setEspecies(especies);
+
+        return toDTO(enfermedadRepository.save(enfermedad));
+
     }
 
 }

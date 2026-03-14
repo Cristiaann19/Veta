@@ -12,6 +12,7 @@ import { Ventas } from './components/layout/ventas/ventas';
 import { Citas } from './components/layout/citas/citas';
 import { Servicios } from './components/layout/servicios/servicios';
 import { Inicio } from './components/inicio/inicio';
+import { authGuard} from './services/auth.guard';
 
 export const routes: Routes = [
     { path: 'login', component: Login, data: { title: 'Iniciar Sesión' } },
@@ -21,7 +22,7 @@ export const routes: Routes = [
         path: '',
         component: Layout,
         children: [
-            { path: 'dashboard', component: Dashboard, data: { title: 'Dashboard' } },
+            { path: 'dashboard', component: Dashboard,canActivate: [authGuard], data: { title: 'Dashboard',  } },
             { path: 'clientes', component: Clientes, data: { title: 'Gestion de Clientes' } },
             { path: 'mascotas', component: Mascotas, data: { title: 'Gestion de Mascotas' } },
             { path: 'vacunas', component: Vacunas, data: { title: 'Gestion de Vacunas' } },

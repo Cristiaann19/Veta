@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Vacuna } from '../../../models/vacuna';
 import { VacunaService } from '../../../services/vacuna';
@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
+import { GToast} from '../../../services/gtoast';
 
 @Component({
   selector: 'app-vacunas',
@@ -36,7 +37,7 @@ export class Vacunas implements OnInit {
   first: number = 0;
   rows: number = 8;
 
-  constructor(private vacunaService: VacunaService, private cdr: ChangeDetectorRef) { }
+  constructor(private vacunaService: VacunaService, private cdr: ChangeDetectorRef,private toast : GToast) { }
 
   ngOnInit(): void {
     this.cargarVacunas();
@@ -89,6 +90,7 @@ export class Vacunas implements OnInit {
   eliminarVacuna(): void {
     this.vacunaService.eliminarVacuna(this.selectedVacuna.id).subscribe(() => {
       console.log('Vacuna eliminada:', this.selectedVacuna);
+      this.toast.success("Enfermedad eliminada");
       setTimeout(() => {
         this.displayDelete = false;
         this.cargarVacunas();
@@ -101,6 +103,7 @@ export class Vacunas implements OnInit {
     this.vacunaService.actualizarVacuna(this.selectedVacuna).subscribe({
       next: (res) => {
         console.log('Vacuna actualizada con éxito:', res);
+        this.toast.success("Vacuna actualizada con exito")
         setTimeout(() => {
           this.displayEdit = false;
           this.cargarVacunas();
@@ -113,11 +116,13 @@ export class Vacunas implements OnInit {
 
   guardarNuevo(): void {
     this.vacunaService.crearVacuna(this.selectedVacuna).subscribe(() => {
-      setTimeout(() => {
-        this.displayNew = false;
-        this.cargarVacunas();
-        this.cdr.detectChanges();
-      }, 0);
+        console.log('Vacuna guardada correctamente');
+        this.toast.success("Vacuna guardada correctamente ");
+        setTimeout(() => {
+          this.displayNew = false;
+          this.cargarVacunas();
+          this.cdr.detectChanges();
+        }, 0);
     });
   }
 }

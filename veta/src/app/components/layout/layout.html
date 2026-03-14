@@ -13,15 +13,15 @@
                     Panel Administrativo
                 </p>
             </div>
-            <div *ngIf="!sidebarOpen" class="w-8 h-8 bg-[#10b981] rounded-lg flex items-center justify-center">
+            <div *ngIf="!sidebarOpen" class="w-8 h-8 bg-blue-primary rounded-lg flex items-center justify-center">
                 <span class="material-symbols-outlined text-sm">pets</span>
             </div>
         </div>
 
         <!-- NAV LINKS -->
         <nav class="flex-1 mt-4 px-2 space-y-1">
-            <a routerLink="/dashboard" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/dashboard" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined flex-shrink-0">home</span>
                 <span *ngIf="sidebarOpen" class="transition-opacity duration-200 whitespace-nowrap">Dashboard</span>
                 <span *ngIf="!sidebarOpen"
@@ -29,72 +29,72 @@
                     Dashboard
                 </span>
             </a>
-            <a routerLink="/citas" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/citas" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined flex-shrink-0">calendar_clock</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Citas</span>
                 <span *ngIf="!sidebarOpen"
                     class="absolute left-14 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-lg">Cita</span>
             </a>
 
-            <a routerLink="/servicios" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/servicios" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined flex-shrink-0">nearby</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Servicios</span>
                 <span *ngIf="!sidebarOpen"
                     class="absolute left-14 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-lg">Servicios</span>
             </a>
 
-            <a routerLink="/productos" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/productos" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined flex-shrink-0">inventory</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Productos</span>
                 <span *ngIf="!sidebarOpen"
                     class="absolute left-14 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-lg">Productos</span>
             </a>
 
-            <a routerLink="/ventas" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/ventas" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined flex-shrink-0">shopping_bag</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Ventas</span>
                 <span *ngIf="!sidebarOpen"
                     class="absolute left-14 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-lg">Ventas</span>
             </a>
 
-            <a routerLink="/clientes" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/clientes" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined flex-shrink-0">person</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Clientes</span>
                 <span *ngIf="!sidebarOpen"
                     class="absolute left-14 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-lg">Clientes</span>
             </a>
 
-            <a routerLink="/trabajadores" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/trabajadores" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined flex-shrink-0">group</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Trabajadores</span>
                 <span *ngIf="!sidebarOpen"
                     class="absolute left-14 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-lg">Trabajadores</span>
             </a>
 
-            <a routerLink="/mascotas" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/mascotas" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined text-xl flex-shrink-0">pets</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Mascotas</span>
                 <span *ngIf="!sidebarOpen"
                     class="absolute left-14 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-lg">Mascotas</span>
             </a>
 
-            <a routerLink="/enfermedades" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/enfermedades" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined text-xl flex-shrink-0">medication</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Enfermedades</span>
                 <span *ngIf="!sidebarOpen"
                     class="absolute left-14 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-lg">Enfermedades</span>
             </a>
 
-            <a routerLink="/vacunas" routerLinkActive="bg-[#3CBCE6] text-white"
-                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-colors group relative">
+            <a routerLink="/vacunas" routerLinkActive="bg-blue-primary text-white"
+                class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-blue-hover hover:text-white transition-colors group relative">
                 <span class="material-symbols-outlined text-xl flex-shrink-0">vaccines</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Vacunas</span>
                 <span *ngIf="!sidebarOpen"
@@ -104,8 +104,8 @@
 
         <!-- FOOTER: CERRAR SESIÓN -->
         <div class="p-2 border-t border-slate-700">
-            <button
-                class="flex items-center gap-3 p-3 text-red-400 py-2.5 hover:text-red-300 w-full group relative rounded-lg hover:bg-red-400/10 transition-colors">
+            <button (click)="cerrarSesion()"
+                class="flex items-center gap-3 p-3 text-red-600 py-2.5 hover:text-red-500 w-full group relative rounded-lg hover:bg-red-400/10 transition-colors">
                 <span class="material-symbols-outlined text-xl flex-shrink-0">exit_to_app</span>
                 <span *ngIf="sidebarOpen" class="whitespace-nowrap">Cerrar Sesión</span>
                 <span *ngIf="!sidebarOpen"
@@ -122,7 +122,7 @@
             <!-- BOTÓN TOGGLE + TÍTULO -->
             <div class="flex items-center gap-4">
                 <button (click)="toggleSidebar()"
-                    class="w-9 h-9 flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 hover:text-[#10b981] transition-colors">
+                    class="w-9 h-9 flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 hover:text-blue-primary transition-colors">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
                 <div>
@@ -131,14 +131,15 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
-                <div class="text-right">
-                    <p class="text-sm font-bold leading-none">ADMIN</p>
-                    <p class="text-[10px] text-slate-500">Administrador</p>
-                </div>
-                <div class="w-10 h-10 bg-[#10b981] text-white rounded-full flex items-center justify-center font-bold">C
-                </div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <p class="text-sm font-bold leading-none">{{ username.toUpperCase() }}</p>
+              <p class="text-[10px] text-slate-500">{{ rolFormateado }}</p>
             </div>
+            <div class="w-10 h-10 bg-blue-primary text-white rounded-full flex items-center justify-center font-bold">
+              {{ inicial }}
+            </div>
+          </div>
         </header>
 
         <main class="flex-1 overflow-y-auto p-8">

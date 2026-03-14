@@ -3,9 +3,10 @@ import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import Aura from '@primeuix/themes/aura';
+import { provideHttpClient, withFetch ,withInterceptors } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import Aura from '@primeuix/themes/aura';
+import {authInterceptor} from './services/auth.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -13,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     MessageService,
-    provideHttpClient(withFetch()),
+    provideHttpClient(withInterceptors([authInterceptor])),
     providePrimeNG({
       theme: {
         preset: Aura,

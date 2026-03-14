@@ -24,3 +24,16 @@ body {
     background: transparent !important;
     border: none !important;
 }
+/*6366f1*/
+@theme {
+  --color-blue-primary: #004DD1;
+  --color-blue-hover: #005DFF;
+
+  --color-primary: var(--color-blue-primary);
+  --color-secondary: #002f9d;
+  --color-blue-dark: #001540;
+  --color-emerald-primary: #10b981;
+
+}
+
+

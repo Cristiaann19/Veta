@@ -12,8 +12,6 @@ import { TableModule } from "primeng/table";
 import { HttpClient } from '@angular/common/http';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { GToast } from '../../../services/gtoast';
-import { inject } from '@angular/core';
-
 
 interface EspecieDTO {
   id: number;
@@ -57,9 +55,7 @@ export class Enfermedades implements OnInit {
   first: number = 0;
   rows: number = 8;
 
-  private toast = inject(GToast);
-
-  constructor(private enfermedadesService: EnfermedadesService, private cdr: ChangeDetectorRef, private http: HttpClient) { }
+  constructor(private enfermedadesService: EnfermedadesService, private cdr: ChangeDetectorRef, private http: HttpClient, private toast : GToast) { }
 
   ngOnInit(): void {
     this.cargarEnfermedades();
@@ -105,9 +101,10 @@ export class Enfermedades implements OnInit {
   }
 
   //PARA LOS MODALES
-  abrirNuevo() : void{
+  abrirNuevo(): void {
     this.displayNew = true;
     this.selectedEnfermedad = {} as Enfermedad;
+    this.selectedEspeciesIds = [];
   }
 
   confirmarEliminar(enfermedad : Enfermedad): void{
@@ -115,28 +112,50 @@ export class Enfermedades implements OnInit {
     this.displayDelete = true;
   }
 
+  abrirEditar(enfermedad: EnfermedadDTO): void {
+    this.selectedEnfermedad = { ...enfermedad };
+    this.selectedEspeciesIds = enfermedad.especies
+      ? enfermedad.especies.map(e => e.id)
+      : [];
+    this.displayEdit = true;
+
+  }
+
   //METHODS
   eliminarEnfermedad() : void {
     this.enfermedadesService.eliminarEnfermedad(this.selectedEnfermedad.id).subscribe(() =>{
       console.log('Enfermedad eliminada: ', this.selectedEnfermedad);
-      this.toast.success("Enfermedad eliminada");
       setTimeout(()=>{
         this.displayDelete = false;
         this.cargarEnfermedades();
         this.cdr.detectChanges();
-      },0)
+      },0);
+      this.toast.success("Enfermedad eliminada");
     })
   }
 
 
   guardarNuevo(): void {
-    this.enfermedadesService.crearEnfermedad(this.selectedEnfermedad).subscribe(() => {
-      setTimeout(() => {
-        this.displayNew = false;
-        this.cargarEnfermedades();
-        this.cdr.detectChanges();
-      }, 0);
-    });
+    const request = {
+      nombre: this.selectedEnfermedad.nombre,
+      descripcion: this.selectedEnfermedad.descripcion,
+      gravedad: this.selectedEnfermedad.gravedad,
+      especiesIds: this.selectedEspeciesIds  // ← agregar esto
+    };
+
+    this.http.post('http://localhost:8080/api/enfermedades', request)
+      .subscribe({
+        next: () => {
+          setTimeout(() => {
+            this.displayNew = false;
+            this.selectedEspeciesIds = [];
+            this.cargarEnfermedades();
+            this.cdr.detectChanges();
+          }, 0);
+          this.toast.success("Enfermedad guardada correctamente");
+        },
+        error: (err) => this.toast.error(err)
+      });
   }
 
   cargarEspecies(): void {
@@ -152,23 +171,14 @@ export class Enfermedades implements OnInit {
       });
   }
 
-  abrirEditar(enfermedad: EnfermedadDTO): void {
-    this.selectedEnfermedad = { ...enfermedad };
-    this.selectedEspeciesIds = enfermedad.especies
-      ? enfermedad.especies.map(e => e.id)
-      : [];
-    this.displayEdit = true;
-
-  }
-
   guardarCambios(): void {
     const request = {
       nombre: this.selectedEnfermedad.nombre,
       descripcion: this.selectedEnfermedad.descripcion,
-      gravedad: this.selectedEnfermedad.gravedad,
+      gravedad: this.selectedEnfermedad.gravedad.toUpperCase(),
       especiesIds: this.selectedEspeciesIds
     };
-
+    this.toast.success("Enfermedad guardada correctamente")
     this.http.put(`http://localhost:8080/api/enfermedades/${this.selectedEnfermedad.id}`, request)
       .subscribe({
         next: () => {
@@ -180,8 +190,7 @@ export class Enfermedades implements OnInit {
         },
         error: (err) => this.toast.error(err)
       });
-    this.toast.success("Enfermedad guardada correctamente")
-  }
 
+  }
 
 }

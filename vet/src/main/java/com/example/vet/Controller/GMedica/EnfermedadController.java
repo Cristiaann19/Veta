@@ -24,8 +24,8 @@ public class EnfermedadController {
     }
 
     @PostMapping
-    public ResponseEntity<Enfermedad> crear(@RequestBody Enfermedad enfermedad) {
-        return ResponseEntity.ok(enfermedadService.guardar(enfermedad));
+    public ResponseEntity<EnfermedadDTO> crearEnfermedad(@RequestBody EnfermedadRequestDTO request){
+        return ResponseEntity.ok(enfermedadService.crear(request));
     }
 
     @GetMapping("/{id}")
